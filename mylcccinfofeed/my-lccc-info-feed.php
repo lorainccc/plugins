@@ -74,6 +74,8 @@ function run_my_lccc_info_feed() {
 }
 run_my_lccc_info_feed();
 
+
+
 // Register Custom Post Type
 function lcccanouncement_post_type() {
 
@@ -190,7 +192,64 @@ function lcccevents_post_type() {
 
 }
 add_action( 'init', 'lcccevents_post_type', 0 );
+// Register Custom Post Type
+function lcccLocation_post_type() {
 
+	$labels = array(
+		'name'                  => _x( 'LCCC Locations', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'LCCC Location', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'LCCC Locations', 'text_domain' ),
+		'name_admin_bar'        => __( 'LCCC Locations', 'text_domain' ),
+		'archives'              => __( 'LCCC Locations Archives', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+		'all_items'             => __( 'All LCCC Locations', 'text_domain' ),
+		'add_new_item'          => __( 'Add New LCCC Location', 'text_domain' ),
+		'add_new'               => __( 'Add New LCCC Location', 'text_domain' ),
+		'new_item'              => __( 'New LCCC Location', 'text_domain' ),
+		'edit_item'             => __( 'Edit LCCC Location', 'text_domain' ),
+		'update_item'           => __( 'Update LCCC Location', 'text_domain' ),
+		'view_item'             => __( 'View LCCC Locations', 'text_domain' ),
+		'search_items'          => __( 'Search LCCC Locations', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into Location', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this Location', 'text_domain' ),
+		'items_list'            => __( 'LCCC Locations list', 'text_domain' ),
+		'items_list_navigation' => __( 'LCCC Locations navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'LCCC Location', 'text_domain' ),
+		'description'           => __( 'Post Type Description', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', ),
+		'taxonomies'            => array( 'category', 'post_tag' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'register_meta_box_cb' => 'add_events_metaboxes',
+		'show_in_rest'       => true,
+  'rest_base'          => 'books-api',
+  'rest_controller_class' => 'WP_REST_Posts_Controller',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'menu_icon'   => 'dashicons-location-alt',
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'post',
+	);
+	register_post_type( 'lccc_location', $args );
+
+}
+add_action( 'init', 'lcccLocation_post_type', 0 );
 /**
 * The Enque Function for the Jquery UI function of the metabox code below
 */
@@ -234,9 +293,21 @@ function event_meta_box_add_meta_box() {
 	);
 }
 add_action( 'add_meta_boxes', 'event_meta_box_add_meta_box' );
-	?>
+function get_location_options( $query_args ) {
+	$args = wp_parse_args( $query_args, array(
+    'post_type' => 'lccc_location',
+) );
+	$posts = get_posts( $args );
 
-<?php
+$post_options = array();
+if ( $posts ) {
+    foreach ( $posts as $post ) {
+        $post_options [ $post->post_title ] = $post->post_title;
+    }
+}
+
+return $post_options;
+}
 function event_meta_box_html( $post) {
 	wp_nonce_field( '_event_meta_box_nonce', 'event_meta_box_nonce' ); ?>
 	
@@ -320,8 +391,19 @@ jQuery('#event_meta_box_display_end_date_and_time').datetimepicker({
 
 		<input type="checkbox" name="event_meta_box_facebook_and_twitter" id="event_meta_box_facebook_and_twitter" value="facebook-and-twitter" <?php echo ( event_meta_box_get_meta( 'event_meta_box_facebook_and_twitter' ) === 'facebook-and-twitter' ) ? 'checked' : ''; ?>>
 		<label for="event_meta_box_facebook_and_twitter"><?php _e( 'Facebook and Twitter', 'event_meta_box' ); ?></label>	</p>	<p>
+
 <label for="event_meta_box_event_location"><?php _e( 'Event Location', 'event_meta_box' ); ?></label><br>
-		<input class="widefat"  type="text" name="event_meta_box_event_location" id="event_meta_box_event_location" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_location' ); ?>">
+	 <select name='event_meta_box_event_location' id='event_meta_box_event_location'>
+  <?php $customposts = new WP_Query('post_type=lccc_location'); 
+			if ($customposts->have_posts()):
+							while ($customposts->have_posts()): $customposts->the_post();
+			?>
+		<option value="<?php the_title(); ?>"><?php the_title();?>				 		</option>
+			<?php
+							endwhile;
+			endif;				
+			?>  
+</select>
 	</p>	<p>
 		<label for="event_meta_box_event_start_date_and_time_"><?php _e( 'Event Start date and time:', 'event_meta_box' ); ?></label><br>
 		<input type="text" name="event_meta_box_event_start_date_and_time_" id="event_meta_box_event_start_date_and_time_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' ); ?>">
