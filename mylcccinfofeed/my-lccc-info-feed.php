@@ -110,7 +110,7 @@ function lcccanouncement_post_type() {
 		'label'                 => __( 'LCCC Anouncement', 'text_domain' ),
 		'description'           => __( 'Post Type Description', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', ),
+		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', 'custom-fields' ),
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,
@@ -228,7 +228,7 @@ function lcccLocation_post_type() {
 		'labels'                => $labels,
 		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes', ),
 		'taxonomies'            => array( 'category', 'post_tag' ),
-		'hierarchical'          => false,
+		'hierarchical'          => true,
 		'public'                => true,
 		'show_ui'               => true,
 		'show_in_menu'          => true,
@@ -244,7 +244,7 @@ function lcccLocation_post_type() {
 		'menu_icon'   => 'dashicons-location-alt',
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
-		'capability_type'       => 'post',
+		'capability_type'       => 'page',
 	);
 	register_post_type( 'lccc_location', $args );
 
@@ -287,7 +287,7 @@ function event_meta_box_add_meta_box() {
 		'event_meta_box-event-meta-box',
 		__( 'Event Meta Box', 'event_meta_box' ),
 		'event_meta_box_html',
-		'post',
+		array('post','lccc_event','lccc_announcement'),
 		'advanced',
 		'core'
 	);
@@ -308,6 +308,23 @@ if ( $posts ) {
 
 return $post_options;
 }
+
+function get_locations() {
+	
+$args = array(
+    'post_type' => 'lccc_location',
+    'nopaging'  => true
+);
+				$customposts = new WP_Query($args); 
+			
+ while ($customposts->have_posts()): $customposts->the_post();
+
+			$location_list = $location_list . '<option value="' . the_title() . '">' . the_title() . '</option>';
+
+	endwhile;
+return $location_list;
+}
+
 function event_meta_box_html( $post) {
 	wp_nonce_field( '_event_meta_box_nonce', 'event_meta_box_nonce' ); ?>
 	
@@ -394,15 +411,13 @@ jQuery('#event_meta_box_display_end_date_and_time').datetimepicker({
 
 <label for="event_meta_box_event_location"><?php _e( 'Event Location', 'event_meta_box' ); ?></label><br>
 	 <select name='event_meta_box_event_location' id='event_meta_box_event_location'>
-  <?php $customposts = new WP_Query('post_type=lccc_location'); 
-			if ($customposts->have_posts()):
-							while ($customposts->have_posts()): $customposts->the_post();
+ 		<?php 
+			$mypages = get_pages('post_type=lccc_location');
+			foreach($mypages as $page)
+			{
+				?><option><?php echo $page->post_title;?></option><?php
+			}
 			?>
-		<option value="<?php the_title(); ?>"><?php the_title();?>				 		</option>
-			<?php
-							endwhile;
-			endif;				
-			?>  
 </select>
 	</p>	<p>
 		<label for="event_meta_box_event_start_date_and_time_"><?php _e( 'Event Start date and time:', 'event_meta_box' ); ?></label><br>
@@ -493,12 +508,16 @@ function event_meta_box_save( $post_id ) {
 		update_post_meta( $post_id, 'event_meta_box_facebook_and_twitter', esc_attr( $_POST['event_meta_box_facebook_and_twitter'] ) );
 	else
 		update_post_meta( $post_id, 'event_meta_box_facebook_and_twitter', null );
+	
 	if ( isset( $_POST['event_meta_box_event_location'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_location', esc_attr( $_POST['event_meta_box_event_location'] ) );
+	
 	if ( isset( $_POST['event_meta_box_event_start_date_and_time_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_start_date_and_time_', esc_attr( $_POST['event_meta_box_event_start_date_and_time_'] ) );
+	
 	if ( isset( $_POST['event_meta_box_event_end_date_and_time_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );
+	
 	if ( isset( $_POST['event_meta_box_ticket_price_s_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_ticket_price_s_', esc_attr( $_POST['event_meta_box_ticket_price_s_'] ) );
 	if ( isset( $_POST['event_meta_box_department_organization_sponsor_'] ) )
@@ -539,6 +558,141 @@ add_action( 'save_post', 'event_meta_box_save' );
 	Usage: event_meta_box_get_meta( 'event_meta_box_display_start_date_and_time' )
 	Usage: event_meta_box_get_meta( 'event_meta_box_display_end_date_and_time' )
 */
+
+
+/** Widget Code */
+
+class LCCC_Whats_Going_On_Widget extends WP_Widget {
+
+	/**
+	 * Register widget with WordPress.
+	 */
+	function __construct() {
+		parent::__construct(
+			'LCCC_Whats_Going_On_Widget', // Base ID
+			__( 'LCCC Whats Going On Widget', 'text_domain' ), // Name
+			array( 'description' => __( 'This plugin is designed to display the current LCCC Events and Announcments', 'text_domain' ), ) // Args
+		);
+	}
+
+	/**
+	 * Front-end display of widget.
+	 *
+	 * @see WP_Widget::widget()
+	 *
+	 * @param array $args     Widget arguments.
+	 * @param array $instance Saved values from database.
+	 */
+	public function widget( $args, $instance ) {
+		if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
+		}
+	if ( ! empty( $instance['whattodisplay'] ) ) {
+	$curentposttype = $instance['whattodisplay'];
+	$currentevents = new WP_Query('post_type='.$curentposttype.''); 
+			if ($currentevents->have_posts()):
+							while ($currentevents->have_posts()): $currentevents->the_post();
+		?>
+<div id="announcment_<?php the_ID(); ?> ">
+<?php
+		the_title('<h3>','</h3>');
+		the_excerpt('<p>','</p>');
+		?>
+<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">Click here to learn more</a>
+</div>
+<p>
+	<?php
+ 	echo event_meta_box_get_meta( 'event_meta_box_name' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_phone' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_e_mail' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_event_location' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_event_end_date_and_time_' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_department_organization_sponsor_' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_associated_web_address_' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_display_start_date_and_time' ).'<br />';
+		echo event_meta_box_get_meta( 'event_meta_box_display_end_date_and_time' ).'<br />';
+		?>
+		</p>
+			<?php
+							endwhile;
+			endif;			
+	}
+	}
+
+	/**
+	 * Back-end widget form.
+	 *
+	 * @see WP_Widget::form()
+	 *
+	 * @param array $instance Previously saved values from database.
+	 */
+	public function form( $instance ) {
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
+		$whattodisplay = ! empty( $instance['whattodisplay'] ) ? $instance['whattodisplay'] : __( 'What To Display', 'text_domain' );
+		?>
+		<p>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		</p>
+<p>
+<label for="<?php echo $this->get_field_id( 'whattodisplay' ); ?>"><?php _e( 'What To Display:' ); ?></label> 
+		 <select name="<?php echo $this->get_field_name( 'whattodisplay' ); ?>" id="<?php echo $this->get_field_id( 'whattodisplay' ); ?>">
+  <?php 
+	$args = array(
+   'public'   => true,
+   '_builtin' => false
+);
+
+$output = 'names'; // names or objects, note names is the default
+$operator = 'and'; // 'and' or 'or'
+
+$post_types = get_post_types( $args, $output, $operator ); 
+
+foreach ( $post_types  as $post_type ) {
+
+   echo '<option>' . $post_type . '</option>';
+}
+
+			?>  
+</select>
+</p>	
+<p>
+<label for="<?php echo $this->get_field_id( 'audience' ); ?>"><?php _e( 'Audience:' ); ?></label> 
+		 <select name="<?php echo $this->get_field_name( 'audience' ); ?>" id="<?php echo $this->get_field_id( 'audience' ); ?>">
+  <?php 
+
+			?>  
+</select>
+</p>	
+<?php 
+	}
+
+	/**
+	 * Sanitize widget form values as they are saved.
+	 *
+	 * @see WP_Widget::update()
+	 *
+	 * @param array $new_instance Values just sent to be saved.
+	 * @param array $old_instance Previously saved values from database.
+	 *
+	 * @return array Updated safe values to be saved.
+	 */
+	public function update( $new_instance, $old_instance ) {
+		$instance = array();
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['whattodisplay'] = ( ! empty( $new_instance['whattodisplay'] ) ) ? strip_tags( $new_instance['whattodisplay'] ) : '';
+				$instance['audience'] = ( ! empty( $new_instance['audience'] ) ) ? strip_tags( $new_instance['audience'] ) : '';
+		return $instance;
+	}
+
+} // class LCCC_Whats_Going_On_Widget
+
+// register LCCC_Whats_Going_On_Widget widget
+function register_lccc_whats_going_on_widget() {
+    register_widget( 'lccc_whats_going_on_widget' );
+}
+add_action( 'widgets_init', 'register_lccc_whats_going_on_widget' );
 
 
 ?>
