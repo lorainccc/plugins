@@ -567,38 +567,40 @@ class LCCC_Whats_Going_On_Widget extends WP_Widget {
 				
 	if ( ! empty( $instance['whattodisplay'] ) ) {
 	$curentposttype = $instance['whattodisplay'];
+echo $curentposttype;		
+?>
+	<div id="<?php echo $curentposttype; ?>_header" class="small-12 medium-12 large-12 columns <?php echo $curentposttype; ?>_header">
+<?php 
+		if($curentposttype == 'lccc_event'){
+		?>
+		<div class="small-4 medium-4 large-4 columns headerlogo">
+			<i class="lccc-font-lccc-reverse"></i>
+		</div>
+	<div class="small-8 medium-8 large-8 columns headertitle">
+		<h3>Events</h3>
+		</div>	
+	<?php
+		}
+		if($curentposttype == 'lccc_announcement'){
+		?>
+		<div class="small-4 medium-4 large-4 columns headerlogo">
+			<i class="lccc-font-lccc-reverse"></i>
+		</div>
+	<div class="small-8 medium-8 large-8 columns headertitle">
+		<h3>Announcements</h3>
+		</div>
+	<?php
+		}
+	?>
+	</div>
+	<?php	
 	$currentevents = new WP_Query('post_type='.$curentposttype.''); 
 			if ($currentevents->have_posts()):
 							while ($currentevents->have_posts()): $currentevents->the_post();
 		?>
 <div id="<?php echo $curentposttype; ?>_<?php the_ID(); ?> " class="small-12 medium-12 large-12 columns">
-<div id="<?php echo $curentposttype; ?>_header " class="small-12 medium-12 large-12 columns">
-
-<?php 
-		if($curentposttype = 'lccc_event'){
-		?>
-	
 	<?php
-		}
-		if($curentposttype = 'lccc_announcement'){
-		?>
-		<div class="small-4 medium-4 large-4 columns headerlogo">
-			<i class="lccc-font-lccc-logo-2c-reverse"></i>
-		</div>
-	<div class="small-8 medium-8 large-8 columns">
-	
-		</div>
-	<?php
-		}
-	?>
-	<?php
-	if ( ! empty( $instance['title'] ) ) {
-			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
-		}
-?>
-	</div>
-	<?php
-		the_title('<h3>','</h3>');
+		the_title('<h3 class="eventtitle">','</h3>');
 		the_excerpt('<p>','</p>');
 		?>
 <p>
@@ -655,9 +657,9 @@ $email= event_meta_box_get_meta( 'event_meta_box_e_mail' );
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form( $instance ) {
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
+		 $defaults = array( 'whattodisplay' => 'Select', 'widgetcategory' => '', 'numberofposts' => '' );
+		$instance = wp_parse_args( (array) $instance, $defaults );	
 		$whattodisplay = ! empty( $instance['whattodisplay'] ) ? $instance['whattodisplay'] : __( 'What To Display', 'text_domain' );
-			$titlebar = ! empty( $instance['titlebar'] ) ? $instance['titlebar'] : __( 'Title Bar', 'text_domain' );
 	
 	$widgetcategory = ! empty( $instance['widgetcategory'] ) ? $instance['widgetcategory'] : __( 'Category', 'text_domain' );
 	
@@ -717,10 +719,10 @@ echo $selectcategory;
 	 * @return array Updated safe values to be saved.
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = array();
+		 $instance = $old_instance;
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		$instance['whattodisplay'] = ( ! empty( $new_instance['whattodisplay'] ) ) ? strip_tags( $new_instance['whattodisplay'] ) : '';
-				$instance['audience'] = ( ! empty( $new_instance['audience'] ) ) ? strip_tags( $new_instance['audience'] ) : '';
+		$instance['audience'] = ( ! empty( $new_instance['audience'] ) ) ? strip_tags( $new_instance['audience'] ) : '';
 		return $instance;
 	}
 
