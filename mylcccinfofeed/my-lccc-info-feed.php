@@ -748,4 +748,8 @@ add_action( 'widgets_init', 'register_lccc_whats_going_on_widget' );
 
 add_filter( 'the_content_more_link', 'modify_read_more_link' );
 
+// MyCampus Guest Page Image Background Size
+
+add_image_size( 'mycampus_background', 1600, 1068);
+
 ?>
