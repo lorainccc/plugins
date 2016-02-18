@@ -541,202 +541,151 @@ add_action( 'save_post', 'event_meta_box_save' );
 
 
 /** Widget Code */
-
 class LCCC_Whats_Going_On_Widget extends WP_Widget {
 
 	/**
-	 * Register widget with WordPress.
+	 * Sets up the widgets name etc
 	 */
-	function __construct() {
-		parent::__construct(
-			'LCCC_Whats_Going_On_Widget', // Base ID
-			__( 'LCCC Whats Going On Widget', 'text_domain' ), // Name
-			array( 'description' => __( 'This plugin is designed to display the current LCCC Events and Announcments', 'text_domain' ), ) // Args
+	public function __construct() {
+		$widget_ops = array( 
+			'classname' => 'LCCC_Whats_Going_On_Widget',
+			'description' => 'LCCC Whats Going On Widget is awesome',
 		);
+		parent::__construct( 'LCCC_Whats_Going_On_Widget', 'LCCC Whats Going On Widget', $widget_ops );
 	}
 
 	/**
-	 * Front-end display of widget.
+	 * Outputs the content of the widget
 	 *
-	 * @see WP_Widget::widget()
-	 *
-	 * @param array $args     Widget arguments.
-	 * @param array $instance Saved values from database.
+	 * @param array $args
+	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-				
-	if ( ! empty( $instance['whattodisplay'] ) ) {
-	$curentposttype = $instance['whattodisplay'];
-echo $curentposttype;		
-?>
-	<div id="<?php echo $curentposttype; ?>_header" class="small-12 medium-12 large-12 columns <?php echo $curentposttype; ?>_header">
-<?php 
-		if($curentposttype == 'lccc_event'){
-		?>
-		<div class="small-4 medium-4 large-4 columns headerlogo">
-			<i class="lccc-font-lccc-reverse"></i>
-		</div>
-	<div class="small-8 medium-8 large-8 columns headertitle">
-		<h3>Events</h3>
-		</div>	
-	<?php
-		}
-		if($curentposttype == 'lccc_announcement'){
-		?>
-		<div class="small-4 medium-4 large-4 columns headerlogo">
-			<i class="lccc-font-lccc-reverse"></i>
-		</div>
-	<div class="small-8 medium-8 large-8 columns headertitle">
-		<h3>Announcements</h3>
-		</div>
-	<?php
-		}
-	?>
-	</div>
-	<?php	
-	$currentevents = new WP_Query('post_type='.$curentposttype.''); 
-			if ($currentevents->have_posts()):
-							while ($currentevents->have_posts()): $currentevents->the_post();
-		?>
-<div id="<?php echo $curentposttype; ?>_<?php the_ID(); ?> " class="small-12 medium-12 large-12 columns">
-	<?php
-		the_title('<h3 class="eventtitle">','</h3>');
-		the_excerpt('<p>','</p>');
-		?>
-<p>
-	<?php
- 	$metaboxname = event_meta_box_get_meta( 'event_meta_box_name' );
-		if ( ! empty( $metaboxname ) ) {
-		echo event_meta_box_get_meta( 'event_meta_box_name' ).'<br/>';	
-		}
-		$phonenumber = event_meta_box_get_meta( 'event_meta_box_phone' );
-if ( ! empty( $phonenumber ) ) {		
-		echo event_meta_box_get_meta( 'event_meta_box_phone' ).'<br />';
-}
-$eventlocation = event_meta_box_get_meta( 'event_meta_box_event_location' );
-		if ( ! empty( $eventlocation ) ) {		
-		echo event_meta_box_get_meta( 'event_meta_box_event_location' ).'<br />';		
-		}
-$email= event_meta_box_get_meta( 'event_meta_box_e_mail' );
-			if ( ! empty( $email ) ) {		
-		echo event_meta_box_get_meta( 'event_meta_box_e_mail' ).'<br />';
-		}
-			$startdateandtime = event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' );
-		if ( ! empty( $startdateandtime ) ) {		
-		echo event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' ).'<br />';
-		}
-				$enddateandtime = event_meta_box_get_meta( 'event_meta_box_event_end_date_and_time_' );
-		if ( ! empty( $enddateandtime ) ) {		
-		echo event_meta_box_get_meta( 'event_meta_box_event_end_date_and_time_' ).'<br />';
-		}
-				$supporter = event_meta_box_get_meta( 'event_meta_box_department_organization_sponsor_' );
-		if ( ! empty( $supporter ) ) {		
-		echo event_meta_box_get_meta( 'event_meta_box_department_organization_sponsor_' ).'<br />';
-		}
-			$webaddress = event_meta_box_get_meta( 'event_meta_box_associated_web_address_' );
-		if ( ! empty( $webaddress ) ) {		
-		echo '<a href="'.event_meta_box_get_meta( 'event_meta_box_associated_web_address_' ).'">'.event_meta_box_get_meta( 'event_meta_box_associated_web_address_') .'</a><br />';
-		}
+		// outputs the content of the widget
+  extract( $args );
+   // these are the widget options
+			$select = $instance['select'];
+			$numberofposts = $instance['numberofposts']; 
+			$whattodisplay = $instance['whattodisplay'];
+			$category = $instance['category']; 
+   echo $before_widget;
+   // Display the widget
+   echo '<div>';
 
-	
-	?>
-		</p>
-</div>
-			<?php
-							endwhile;
-			endif;			
+   // Get $select value
+	if ( $select == 'lorem' ) {
+		echo 'Lorem option is Selected';
+		} else if ( $select == 'ipsum' ) {
+		echo 'ipsum option is Selected';
+		} else {
+		echo 'dolorem option is Selected';
 	}
-		
+echo '</br>';
+		if( $numberofposts == 5){
+			echo 5;
+		}else if($numberofposts == 10){
+			echo 10;
+		}else if($numberofposts == 15){
+			echo 15;	
+		}else {
+			echo 1;
+		}
+   echo '</div>';
+   echo $after_widget;
 	}
 
 	/**
-	 * Back-end widget form.
+	 * Outputs the options form on admin
 	 *
-	 * @see WP_Widget::form()
-	 *
-	 * @param array $instance Previously saved values from database.
+	 * @param array $instance The widget options
 	 */
 	public function form( $instance ) {
-		 $defaults = array( 'whattodisplay' => 'Select', 'widgetcategory' => '', 'numberofposts' => '' );
-		$instance = wp_parse_args( (array) $instance, $defaults );	
-		$whattodisplay = ! empty( $instance['whattodisplay'] ) ? $instance['whattodisplay'] : __( 'What To Display', 'text_domain' );
-	
-	$widgetcategory = ! empty( $instance['widgetcategory'] ) ? $instance['widgetcategory'] : __( 'Category', 'text_domain' );
-	
-	$numberofposts = ! empty( $instance['numberofposts'] ) ? $instance['numberofposts'] : __( 'Number of posts', 'text_domain' );		
-		?>
+		// outputs the options form on admin
+		
+// Check values
+if( $instance) {
+					$numberofposts = esc_attr($instance['numberofposts']);
+					$whattodisplay = esc_attr($instance['whattodisplay']);
+					$widgetcategory = esc_attr($instance['category']);
+} else {
+					$numberofposts = '';
+					$whattodisplay = '';
+					$widgetcategory = '';
+}
+?>
+
 <p>
-<label for="<?php echo $this->get_field_id( 'whattodisplay' ); ?>"><?php _e( 'What To Display:' ); ?></label> 
-		 <select name="<?php echo $this->get_field_name( 'whattodisplay' ); ?>" id="<?php echo $this->get_field_id( 'whattodisplay' ); ?>">
-	<option value="">select...</option>
-				<?php 
-	$args = array(
+<label for="<?php echo $this->get_field_id('numberofposts'); ?>"><?php _e('Number of posts', 'wp_widget_plugin'); ?></label>
+<select name="<?php echo $this->get_field_name('numberofposts'); ?>" id="<?php echo $this->get_field_id('numberofposts'); ?>">
+<?php
+$options = array('select..',5, 10, 15);
+foreach ($options as $option) {
+echo '<option value="' . $option . '" id="' . $option . '"', $numberofposts == $option ? ' selected="selected"' : '', '>', $option, '</option>';
+}
+?>
+</select>
+</p>
+		<p>
+<label for="<?php echo $this->get_field_id('whattodisplay'); ?>"><?php _e('What to display?', 'wp_widget_plugin'); ?></label>
+<select name="<?php echo $this->get_field_name('whattodisplay'); ?>" id="<?php echo $this->get_field_id('whattodisplay'); ?>"class="widefat">
+<?php
+$args = array(
    'public'   => true,
    '_builtin' => false
 );
-
 $output = 'names'; // names or objects, note names is the default
 $operator = 'and'; // 'and' or 'or'
-
 $post_types = get_post_types( $args, $output, $operator ); 
-
+$options = array();
 foreach ( $post_types  as $post_type ) {
-   echo '<option  value="'.$post_type.'">' . $post_type . '</option>';
+   $options[] = $post_type ;
 }
-
-			?>  
-</select>
-</p>	
-<p>
-<label for="<?php echo $this->get_field_id( 'widgetcategory' ); ?>"><?php _e( 'Category:' ); ?></label> 
-<?php
-$selectcategory = wp_dropdown_categories('show_option_none=Select Category&show_count=1&orderby=name&echo=0&selected=6');
-$selectcategory = preg_replace("#<select([^>]*)>#", "<select$1 onchange='return this.form.submit()'>", $selectcategory);
-echo $selectcategory;
+foreach ($options as $option) {
+echo '<option value="' . $option . '" id="' . $option . '"', $whattodisplay == $option ? ' selected="selected"' : '', '>', $option, '</option>';
+}
 ?>
-</p>
-<p>
-<label for="<?php echo $this->get_field_id( 'numberofposts' ); ?>"><?php _e( 'Number of posts:' ); ?></label> 
-	<select name="<?php echo $this->get_field_name( 'numberofposts' ); ?>" id="<?php echo $this->get_field_id( 'numberofposts' ); ?>">
-  <option value="">select...</option> 
-		<option value="5"> 5 </option>
-		<option value="10"> 10 </option>
-		<option value="15"> 15 </option>
-		<option value="20"> 20 </option>		
 </select>
 </p>
-<?php 
+		<p>
+<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category:', 'wp_widget_plugin'); ?></label>
+
+<select name="<?php echo $this->get_field_name('category'); ?>" id="<?php echo $this->get_field_id('category'); ?>"class="widefat">
+		<?php
+  // Get categories as array
+  $categories = get_categories( $args );
+  foreach ( $categories as $category ) :
+  		echo '<option value="' . $category->name . '" id="' . $category->term_id . '"', $widgetcategory == $category->name ? ' selected="selected"' : '', '>', $category->name, '</option>';
+  endforeach;
+?>
+</select>		
+		
+</p>
+<?php
 	}
 
 	/**
-	 * Sanitize widget form values as they are saved.
+	 * Processing widget options on save
 	 *
-	 * @see WP_Widget::update()
-	 *
-	 * @param array $new_instance Values just sent to be saved.
-	 * @param array $old_instance Previously saved values from database.
-	 *
-	 * @return array Updated safe values to be saved.
+	 * @param array $new_instance The new options
+	 * @param array $old_instance The previous options
 	 */
 	public function update( $new_instance, $old_instance ) {
-		 $instance = $old_instance;
-		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-		$instance['whattodisplay'] = ( ! empty( $new_instance['whattodisplay'] ) ) ? strip_tags( $new_instance['whattodisplay'] ) : '';
-		$instance['audience'] = ( ! empty( $new_instance['audience'] ) ) ? strip_tags( $new_instance['audience'] ) : '';
-		return $instance;
+		// processes widget options to be saved
+		       $instance = $old_instance;
+      // Fields
+     	$instance['numberofposts'] = strip_tags($new_instance['numberofposts']);
+							$instance['whattodisplay'] = strip_tags($new_instance['whattodisplay']);
+		 $instance['category'] = strip_tags($new_instance['category']);
+						return $instance;
 	}
-
-} // class LCCC_Whats_Going_On_Widget
-
-// register LCCC_Whats_Going_On_Widget widget
-function register_lccc_whats_going_on_widget() {
-    register_widget( 'lccc_whats_going_on_widget' );
 }
-add_action( 'widgets_init', 'register_lccc_whats_going_on_widget' );
+add_action( 'widgets_init', function(){
+	register_widget( 'LCCC_Whats_Going_On_Widget' );
+});
 
 // CHANGE EXCERPT LENGTH FOR DIFFERENT POST TYPES
  
-    function isacustom_excerpt_length($length) {
+function isacustom_excerpt_length($length) {
     global $post;
     if ($post->post_type == 'lccc_event')
     return 20;
@@ -744,9 +693,7 @@ add_action( 'widgets_init', 'register_lccc_whats_going_on_widget' );
     return 90;
     else
     return 55;
-    }
-    add_filter('excerpt_length', 'isacustom_excerpt_length');
-
-add_filter( 'the_content_more_link', 'modify_read_more_link' );
+}
+add_filter('excerpt_length', 'isacustom_excerpt_length');
 
 ?>
