@@ -567,31 +567,33 @@ class LCCC_Whats_Going_On_Widget extends WP_Widget {
 			$select = $instance['select'];
 			$numberofposts = $instance['numberofposts']; 
 			$whattodisplay = $instance['whattodisplay'];
-			$category = $instance['category']; 
+			$widgetcategory = $instance['category']; 
    echo $before_widget;
    // Display the widget
    echo '<div>';
-
-   // Get $select value
-	if ( $select == 'lorem' ) {
-		echo 'Lorem option is Selected';
-		} else if ( $select == 'ipsum' ) {
-		echo 'ipsum option is Selected';
-		} else {
-		echo 'dolorem option is Selected';
-	}
-echo '</br>';
-		if( $numberofposts == 5){
-			echo 5;
-		}else if($numberofposts == 10){
-			echo 10;
-		}else if($numberofposts == 15){
-			echo 15;	
-		}else {
-			echo 1;
+	  // Get $select value
+ if ($whattodisplay == 'lccc_event'){
+					$eventargs=array(
+					'post_type' => $whattodisplay,
+					'post_status' => 'publish',
+  			'posts_per_page' => $numberofposts,
+					'order' => 'DESC',
+					'category' => $widgetcategory
+					);
+					echo $widgetcategory;
+					$newevents = new WP_Query($eventargs);
+					if ( $newevents->have_posts() ) :
+									while ( $newevents->have_posts() ) : $newevents->the_post();
+  							the_title('<h3>','</h3>');
+									the_content('<p>','</p>');
+									endwhile;
+					endif;
 		}
-   echo '</div>';
-   echo $after_widget;
+		if ($whattodisplay == 'lccc_announcement'){
+					echo $whattodisplay.' is being displayed';		
+		}
+		echo '</div>';
+  echo $after_widget;
 	}
 
 	/**
