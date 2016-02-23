@@ -116,7 +116,6 @@ function lcccanouncement_post_type() {
 		'show_ui'               => true,
 		'show_in_menu'          => true,
 		'menu_position'         => 5,
-		'register_meta_box_cb' => 'add_events_metaboxes',
 		'show_in_rest'       => true,
   'rest_base'          => 'books-api',
   'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -232,7 +231,6 @@ function lcccLocation_post_type() {
 		'show_ui'               => true,
 		'show_in_menu'          => true,
 		'menu_position'         => 5,
-		'register_meta_box_cb' => 'add_events_metaboxes',
 		'show_in_rest'       => true,
   'rest_base'          => 'books-api',
   'rest_controller_class' => 'WP_REST_Posts_Controller',
@@ -351,8 +349,7 @@ jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
 
 		<input type="radio" name="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_" id="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__1" value="Revision to previous news/event" <?php echo ( event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' ) === 'Revision to previous news/event' ) ? 'checked' : ''; ?>>
 <label for="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__1">Revision to previous news/event</label><br>
-
-		<input type="radio" name="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_" id="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__2" value="Replaceable a previous news/event" <?php echo ( event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' ) === 'Replaceable a previous news/event' ) ? 'checked' : ''; ?>>
+<p>	<input type="radio" name="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_" id="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__2" value="Replaceable a previous news/event" <?php echo ( event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' ) === 'Replaceable a previous news/event' ) ? 'checked' : ''; ?>>
 <label for="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__2">Replaceable a previous news/event</label><br>
 	</p>	<p>
 <h4>Announcement for:</h4>
@@ -567,32 +564,102 @@ class LCCC_Whats_Going_On_Widget extends WP_Widget {
 			$select = $instance['select'];
 			$numberofposts = $instance['numberofposts']; 
 			$whattodisplay = $instance['whattodisplay'];
-			$widgetcategory = $instance['category']; 
+			$widgetcategory = $instance['category'];
    echo $before_widget;
    // Display the widget
-   echo '<div>';
-	  // Get $select value
+		 echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'">';
+		 if ($whattodisplay == 'lccc_event'){
+   echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
+							echo '<div class="small-12 medium-4 large-4 columns '.$whattodisplay.' headerlogo">';
+											echo '<i class="lccc-font-lccc-reverse">'.'</i>';
+							echo '</div>';
+							echo '<div class="small-12 medium-8 large-8 columns ">';
+										echo '<h2 class="headertext">'.'Events'.'</h2>';
+							echo '</div>';
+			echo '</div>';
+			}
+		if ($whattodisplay == 'lccc_announcement'){
+   echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
+						echo '<h2 class="announcementheader">'.'In The News'.'</h2>';				
+			echo '</div>';
+			}
+	  
  if ($whattodisplay == 'lccc_event'){
 					$eventargs=array(
 					'post_type' => $whattodisplay,
 					'post_status' => 'publish',
   			'posts_per_page' => $numberofposts,
 					'order' => 'DESC',
-					'category' => $widgetcategory
+					'category_name' => $widgetcategory
 					);
-					echo $widgetcategory;
 					$newevents = new WP_Query($eventargs);
 					if ( $newevents->have_posts() ) :
 									while ( $newevents->have_posts() ) : $newevents->the_post();
-  							the_title('<h3>','</h3>');
-									the_content('<p>','</p>');
-									endwhile;
+			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
+								echo '<div class="small-12 medium-3 large-3 columns calender">';
+												$eventdate = event_meta_box_get_meta(
+'event_meta_box_event_start_date_and_time_');
+												$date=strtotime($eventdate);
+												$month=date("M",$date);
+												$day=date("d",$date);
+								echo '<p class="month">'.$month.'</p>';
+								echo '<p class="day">'.$day.'</p>';
+								echo '</div>';
+								echo '<div class="small-12 medium-9 large-9 columns">';
+  						?>
+								<a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
+								<?php
+											the_excerpt('<p>','</p>');
+								echo '</div>';
+								echo '</div>';
+							endwhile;
 					endif;
 		}
 		if ($whattodisplay == 'lccc_announcement'){
-					echo $whattodisplay.' is being displayed';		
+					$announcementargs=array(
+					'post_type' => $whattodisplay,
+					'post_status' => 'publish',
+  			'posts_per_page' => $numberofposts,
+					'order' => 'DESC',
+					'category_name' => $widgetcategory
+					);
+					$newevents = new WP_Query($announcementargs);
+					if ( $newevents->have_posts() ) :
+									while ( $newevents->have_posts() ) : $newevents->the_post();
+			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
+								echo '<div class="small-12 medium-3 large-3 columns eventhumbnail">';
+												the_post_thumbnail();
+								echo '</div>';
+								echo '<div class="small-12 medium-9 large-9 columns">';
+  						?>
+								<a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
+								<?php
+											the_excerpt('<p>','</p>');
+								echo '</div>';
+								echo '</div>';
+							endwhile;
+					endif;
 		}
 		echo '</div>';
+		if ($whattodisplay == 'lccc_announcement'){
+					$currentpostype = 'Announcments';
+			echo '<div class="small-12 medium-12 large-12 columns">';
+							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button">View All '.$currentpostype .'</a>';
+		echo '</div>';
+		}
+		if ($whattodisplay == 'lccc_event'){
+					$currentpostype = 'Events';
+			echo '<div class="small-12 medium-12 large-12 columns">';
+							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All '.$currentpostype .'</a>';
+		echo '</div>';
+		}
+		if ($whattodisplay == 'lccc_location'){
+					$currentpostype = 'Locations';
+			echo '<div class="small-12 medium-12 large-12 columns">';
+							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All '.$currentpostype .'</a>';
+		echo '</div>';
+		}
+		
   echo $after_widget;
 	}
 
@@ -687,15 +754,15 @@ add_action( 'widgets_init', function(){
 
 // CHANGE EXCERPT LENGTH FOR DIFFERENT POST TYPES
  
-function isacustom_excerpt_length($length) {
+function custom_excerpt_length($length) {
     global $post;
     if ($post->post_type == 'lccc_event')
-    return 20;
+    return 30;
     else if ($post->post_type == 'lccc_announcement')
-    return 90;
+    return 70;
     else
-    return 55;
+    return 40;
 }
-add_filter('excerpt_length', 'isacustom_excerpt_length');
+add_filter('excerpt_length', 'custom_excerpt_length');
 
 ?>
