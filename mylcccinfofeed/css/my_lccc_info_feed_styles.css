@@ -1,3 +1,19 @@
 .headerlogo i{color: #ffffff;
-    font-size: 4rem;}
-.headerlogo {background-color: #003B76;}
+    font-size: 3.5rem;}
+.lccc_event_header {background-color: #003B76;}
+.column, .columns .lccc_announcement_header {padding: 0;}
+.widget h2.headertext{color: #fff;font-size: 1.9rem;line-height: 2.105263;margin-bottom: 0.5rem;}
+.lccc-font-lccc-reverse:before {
+    font-size: 4.0rem;
+}
+.lccc_event .headerlogo{padding-right: 0;}
+.lccc_event_header{max-height: 65px;margin-bottom: 1rem;}
+.calender{background-image: url(../images/calendar.png);background-repeat: no-repeat;min-height: 80px;}
+.widget p.month{margin-bottom: 0;margin-top: 12px;margin-left: 4px;width: 100%; font-weight: bold;color: #003B76;line-height: 1.7;font-size: 0.97rem;}
+.widget p.day{margin-bottom: 0;    margin-top: -10px;
+    margin-left: 9px; font-weight: bold;color: #003B76;}
+.widget h3.eventtitle{font-size: 1rem;line-height: 1.3125;margin-bottom: 0.3125em;color: #003B76;    font-size: 1.22rem;
+}
+a.button, a.button, a.button.expand, a.button.expand{background-color: #003B76;}
+.eventcontainer{border-bottom: 1px inset #AAAAAA; margin-bottom: 10px;}
+.widget h2.announcementheader{font-size: 2.2rem;color: #003B76;}
