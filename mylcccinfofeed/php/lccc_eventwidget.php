@@ -31,10 +31,10 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 		 echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'">';
 		 if ($whattodisplay == 'lccc_event'){
    echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
-							echo '<div class="small-12 medium-4 large-4 columns '.$whattodisplay.' headerlogo">';
+							echo '<div class="small-4 medium-4 large-4 columns '.$whattodisplay.' headerlogo">';
 											echo '<i class="lccc-font-lccc-reverse">'.'</i>';
 							echo '</div>';
-							echo '<div class="small-12 medium-8 large-8 columns ">';
+							echo '<div class="small-8 medium-8 large-8 columns ">';
 										echo '<h2 class="headertext">'.'Events'.'</h2>';
 							echo '</div>';
 			echo '</div>';
