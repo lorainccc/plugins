@@ -59,54 +59,19 @@ jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
 		<input class="widefat"  type="text" name="event_meta_box_e_mail" id="event_meta_box_e_mail" value="<?php echo event_meta_box_get_meta( 'event_meta_box_e_mail' ); ?>">
 	
 	</p>	<p>
-<h4>Is this a revision to an event that was previously submitted?</h4>
-		<input type="radio" name="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_" id="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__0" value="New news/event" <?php echo ( event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' ) === 'New news/event' ) ? 'checked' : ''; ?>>
-<label for="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__0">New news/event</label><br>
+<br>
+	<p>
+<h4>Audience:</h4>
+	<p>
 
-		<input type="radio" name="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_" id="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__1" value="Revision to previous news/event" <?php echo ( event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' ) === 'Revision to previous news/event' ) ? 'checked' : ''; ?>>
-<label for="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__1">Revision to previous news/event</label><br>
-<p>	<input type="radio" name="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_" id="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__2" value="Replaceable a previous news/event" <?php echo ( event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' ) === 'Replaceable a previous news/event' ) ? 'checked' : ''; ?>>
-<label for="event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted__2">Replaceable a previous news/event</label><br>
-	</p>	<p>
-<h4>Announcement for:</h4>
-		<input type="checkbox" name="event_meta_box_fyi" id="event_meta_box_fyi" value="fyi" <?php echo ( event_meta_box_get_meta( 'event_meta_box_fyi' ) === 'fyi' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_fyi"><?php _e( 'FYI', 'event_meta_box' ); ?></label>	</p>	<p>
+		<input type="checkbox" name="event_meta_box_employee" id="event_meta_box_employee" value="employee" <?php echo ( event_meta_box_get_meta( 'event_meta_box_employee' ) === 'employee' ) ? 'checked' : ''; ?>>
+		<label for="event_meta_box_employee"><?php _e( 'Employee', 'lccc_event_metabox' ); ?></label>	</p>	<p>
 
-		<input type="checkbox" name="event_meta_box_lccc_cable_tv" id="event_meta_box_lccc_cable_tv" value="lccc-cable-tv" <?php echo ( event_meta_box_get_meta( 'event_meta_box_lccc_cable_tv' ) === 'lccc-cable-tv' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_lccc_cable_tv"><?php _e( 'LCCC Cable TV', 'event_meta_box' ); ?></label>	</p>	<p>
+		<input type="checkbox" name="event_meta_box_community" id="event_meta_box_community" value="community" <?php echo ( event_meta_box_get_meta( 'event_meta_box_community' ) === 'community' ) ? 'checked' : ''; ?>>
+		<label for="event_meta_box_community"><?php _e( 'Community', 'lccc_event_metabox' ); ?></label>	</p>	<p>
 
-		<input type="checkbox" name="event_meta_box_lccc_flat_screens" id="event_meta_box_lccc_flat_screens" value="lccc-flat-screens" <?php echo ( event_meta_box_get_meta( 'event_meta_box_lccc_flat_screens' ) === 'lccc-flat-screens' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_lccc_flat_screens"><?php _e( 'LCCC Flat Screens', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_public_event_calender" id="event_meta_box_public_event_calender" value="public-event-calender" <?php echo ( event_meta_box_get_meta( 'event_meta_box_public_event_calender' ) === 'public-event-calender' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_public_event_calender"><?php _e( 'Public Event Calender', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_lccc_marquee" id="event_meta_box_lccc_marquee" value="lccc-marquee" <?php echo ( event_meta_box_get_meta( 'event_meta_box_lccc_marquee' ) === 'lccc-marquee' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_lccc_marquee"><?php _e( 'LCCC Marquee', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_lccc_update" id="event_meta_box_lccc_update" value="lccc-update" <?php echo ( event_meta_box_get_meta( 'event_meta_box_lccc_update' ) === 'lccc-update' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_lccc_update"><?php _e( 'LCCC Update', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_lccc_proud" id="event_meta_box_lccc_proud" value="lccc-proud" <?php echo ( event_meta_box_get_meta( 'event_meta_box_lccc_proud' ) === 'lccc-proud' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_lccc_proud"><?php _e( 'LCCC Proud', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_press_release" id="event_meta_box_press_release" value="press-release" <?php echo ( event_meta_box_get_meta( 'event_meta_box_press_release' ) === 'press-release' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_press_release"><?php _e( 'Press Release', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_studetn_email_newsletter" id="event_meta_box_studetn_email_newsletter" value="studetn-email-newsletter" <?php echo ( event_meta_box_get_meta( 'event_meta_box_studetn_email_newsletter' ) === 'studetn-email-newsletter' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_studetn_email_newsletter"><?php _e( 'Studetn EMail Newsletter', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_high_school_student_email_newsletter" id="event_meta_box_high_school_student_email_newsletter" value="high-school-student-email-newsletter" <?php echo ( event_meta_box_get_meta( 'event_meta_box_high_school_student_email_newsletter' ) === 'high-school-student-email-newsletter' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_high_school_student_email_newsletter"><?php _e( 'High School Student Email Newsletter', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_career_focus_newsletter" id="event_meta_box_career_focus_newsletter" value="career-focus-newsletter" <?php echo ( event_meta_box_get_meta( 'event_meta_box_career_focus_newsletter' ) === 'career-focus-newsletter' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_career_focus_newsletter"><?php _e( 'Career Focus Newsletter', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_lccc_web_site" id="event_meta_box_lccc_web_site" value="lccc-web-site" <?php echo ( event_meta_box_get_meta( 'event_meta_box_lccc_web_site' ) === 'lccc-web-site' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_lccc_web_site"><?php _e( 'LCCC Web Site', 'event_meta_box' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_facebook_and_twitter" id="event_meta_box_facebook_and_twitter" value="facebook-and-twitter" <?php echo ( event_meta_box_get_meta( 'event_meta_box_facebook_and_twitter' ) === 'facebook-and-twitter' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_facebook_and_twitter"><?php _e( 'Facebook and Twitter', 'event_meta_box' ); ?></label>	</p>	<p>
+		<input type="checkbox" name="event_meta_box_students" id="event_meta_box_students" value="students" <?php echo ( event_meta_box_get_meta( 'event_meta_box_students' ) === 'students' ) ? 'checked' : ''; ?>>
+		<label for="event_meta_box_students"><?php _e( 'Students', 'lccc_event_metabox' ); ?></label>	</p>
 
 <label for="event_meta_box_event_location"><?php _e( 'Event Location', 'event_meta_box' ); ?></label><br>
 	 <select name='event_meta_box_event_location' id='event_meta_box_event_location'>
@@ -118,7 +83,7 @@ jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
 			}
 			?>
 </select>
-	</p>	<p>
+	<p>
 		<label for="event_meta_box_event_start_date_and_time_"><?php _e( 'Event Start date and time:', 'event_meta_box' ); ?></label><br>
 		<input type="text" name="event_meta_box_event_start_date_and_time_" id="event_meta_box_event_start_date_and_time_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' ); ?>">
 	</p>	<p>
@@ -147,60 +112,19 @@ function event_meta_box_save( $post_id ) {
 		update_post_meta( $post_id, 'event_meta_box_phone', esc_attr( $_POST['event_meta_box_phone'] ) );
 	if ( isset( $_POST['event_meta_box_e_mail'] ) )
 		update_post_meta( $post_id, 'event_meta_box_e_mail', esc_attr( $_POST['event_meta_box_e_mail'] ) );
-	if ( isset( $_POST['event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_'] ) )
-		update_post_meta( $post_id, 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_', esc_attr( $_POST['event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_'] ) );
-	if ( isset( $_POST['event_meta_box_fyi'] ) )
-		update_post_meta( $post_id, 'event_meta_box_fyi', esc_attr( $_POST['event_meta_box_fyi'] ) );
+	
+	if ( isset( $_POST['event_meta_box_employee'] ) )
+		update_post_meta( $post_id, 'event_meta_box_employee', esc_attr( $_POST['event_meta_box_employee'] ) );
 	else
-		update_post_meta( $post_id, 'event_meta_box_fyi', null );
-	if ( isset( $_POST['event_meta_box_lccc_cable_tv'] ) )
-		update_post_meta( $post_id, 'event_meta_box_lccc_cable_tv', esc_attr( $_POST['event_meta_box_lccc_cable_tv'] ) );
+		update_post_meta( $post_id, 'event_meta_box_employee', null );
+	if ( isset( $_POST['event_meta_box_community'] ) )
+		update_post_meta( $post_id, 'event_meta_box_community', esc_attr( $_POST['event_meta_box_community'] ) );
 	else
-		update_post_meta( $post_id, 'event_meta_box_lccc_cable_tv', null );
-	if ( isset( $_POST['event_meta_box_lccc_flat_screens'] ) )
-		update_post_meta( $post_id, 'event_meta_box_lccc_flat_screens', esc_attr( $_POST['event_meta_box_lccc_flat_screens'] ) );
+		update_post_meta( $post_id, 'event_meta_box_community', null );
+	if ( isset( $_POST['event_meta_box_students'] ) )
+		update_post_meta( $post_id, 'event_meta_box_students', esc_attr( $_POST['event_meta_box_students'] ) );
 	else
-		update_post_meta( $post_id, 'event_meta_box_lccc_flat_screens', null );
-	if ( isset( $_POST['event_meta_box_public_event_calender'] ) )
-		update_post_meta( $post_id, 'event_meta_box_public_event_calender', esc_attr( $_POST['event_meta_box_public_event_calender'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_public_event_calender', null );
-	if ( isset( $_POST['event_meta_box_lccc_marquee'] ) )
-		update_post_meta( $post_id, 'event_meta_box_lccc_marquee', esc_attr( $_POST['event_meta_box_lccc_marquee'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_lccc_marquee', null );
-	if ( isset( $_POST['event_meta_box_lccc_update'] ) )
-		update_post_meta( $post_id, 'event_meta_box_lccc_update', esc_attr( $_POST['event_meta_box_lccc_update'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_lccc_update', null );
-	if ( isset( $_POST['event_meta_box_lccc_proud'] ) )
-		update_post_meta( $post_id, 'event_meta_box_lccc_proud', esc_attr( $_POST['event_meta_box_lccc_proud'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_lccc_proud', null );
-	if ( isset( $_POST['event_meta_box_press_release'] ) )
-		update_post_meta( $post_id, 'event_meta_box_press_release', esc_attr( $_POST['event_meta_box_press_release'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_press_release', null );
-	if ( isset( $_POST['event_meta_box_studetn_email_newsletter'] ) )
-		update_post_meta( $post_id, 'event_meta_box_studetn_email_newsletter', esc_attr( $_POST['event_meta_box_studetn_email_newsletter'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_studetn_email_newsletter', null );
-	if ( isset( $_POST['event_meta_box_high_school_student_email_newsletter'] ) )
-		update_post_meta( $post_id, 'event_meta_box_high_school_student_email_newsletter', esc_attr( $_POST['event_meta_box_high_school_student_email_newsletter'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_high_school_student_email_newsletter', null );
-	if ( isset( $_POST['event_meta_box_career_focus_newsletter'] ) )
-		update_post_meta( $post_id, 'event_meta_box_career_focus_newsletter', esc_attr( $_POST['event_meta_box_career_focus_newsletter'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_career_focus_newsletter', null );
-	if ( isset( $_POST['event_meta_box_lccc_web_site'] ) )
-		update_post_meta( $post_id, 'event_meta_box_lccc_web_site', esc_attr( $_POST['event_meta_box_lccc_web_site'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_lccc_web_site', null );
-	if ( isset( $_POST['event_meta_box_facebook_and_twitter'] ) )
-		update_post_meta( $post_id, 'event_meta_box_facebook_and_twitter', esc_attr( $_POST['event_meta_box_facebook_and_twitter'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_facebook_and_twitter', null );
+		update_post_meta( $post_id, 'event_meta_box_students', null );
 	
 	if ( isset( $_POST['event_meta_box_event_location'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_location', esc_attr( $_POST['event_meta_box_event_location'] ) );
@@ -228,20 +152,9 @@ add_action( 'save_post', 'event_meta_box_save' );
 	Usage: event_meta_box_get_meta( 'event_meta_box_name' )
 	Usage: event_meta_box_get_meta( 'event_meta_box_phone' )
 	Usage: event_meta_box_get_meta( 'event_meta_box_e_mail' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_is_this_a_revision_to_an_event_that_was_previously_submitted_' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_fyi' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_lccc_cable_tv' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_lccc_flat_screens' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_public_event_calender' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_lccc_marquee' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_lccc_update' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_lccc_proud' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_press_release' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_studetn_email_newsletter' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_high_school_student_email_newsletter' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_career_focus_newsletter' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_lccc_web_site' )
-	Usage: event_meta_box_get_meta( 'event_meta_box_facebook_and_twitter' )
+	Usage: event_meta_box_get_meta( 'event_meta_box_employee' )
+	Usage: event_meta_box_get_meta( 'event_meta_box_community' )
+	Usage: event_meta_box_get_meta( 'event_meta_box_students' )
 	Usage: event_meta_box_get_meta( 'event_meta_box_event_location' )
 	Usage: event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' )
 	Usage: event_meta_box_get_meta( 'event_meta_box_event_end_date_and_time_' )

@@ -79,6 +79,8 @@ require_once( plugin_dir_path( __FILE__ ).'php/lccc_posttypes.php' );
 * The Enque Function for the Jquery UI function of the metabox code below
 */
 function my_lccc_info_feed_scripts() {
+	wp_enqueue_style( 'lato-google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic', false ); 	
+	
 	wp_enqueue_script('jquery-ui-datepicker');
 	
 	wp_enqueue_script('jquery-ui-core');
@@ -129,7 +131,7 @@ function custom_excerpt_length($length) {
     else if ($post->post_type == 'lccc_announcement')
     return 70;
     else
-    return 40;
+    return 20;
 }
 add_filter('excerpt_length', 'custom_excerpt_length');
 
