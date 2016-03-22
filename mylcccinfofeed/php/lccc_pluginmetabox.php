@@ -36,10 +36,10 @@ function event_meta_box_html( $post) {
 <script>
 jQuery(document).ready(function(){
 jQuery('#event_meta_box_event_start_date_and_time_').datetimepicker({
-	timeFormat: "hh:mm tt"
+	dateFormat: "mm/dd/yy", timeFormat: "hh:mm tt"
 });
 jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
-	timeFormat: "hh:mm tt"
+	dateFormat: "mm/dd/yy", timeFormat: "hh:mm tt"
 });
 
 });
@@ -130,8 +130,11 @@ function event_meta_box_save( $post_id ) {
 		update_post_meta( $post_id, 'event_meta_box_event_location', esc_attr( $_POST['event_meta_box_event_location'] ) );
 	
 	if ( isset( $_POST['event_meta_box_event_start_date_and_time_'] ) )
-		update_post_meta( $post_id, 'event_meta_box_event_start_date_and_time_', esc_attr( $_POST['event_meta_box_event_start_date_and_time_'] ) );
-	
+   update_post_meta( $post_id, 'event_meta_box_event_start_date_and_time_', esc_attr( $_POST['event_meta_box_event_start_date_and_time_'] ) );             
+		$eventStartDate = $_POST['event_meta_box_event_start_date_and_time_'];
+		$date=strtotime($eventStartDate);
+		update_post_meta( $post_id, 'event_start_date', esc_attr( date('Y-m-d',$date) ) );
+
 	if ( isset( $_POST['event_meta_box_event_end_date_and_time_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );
 	
