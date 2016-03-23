@@ -79,6 +79,8 @@ require_once( plugin_dir_path( __FILE__ ).'php/lccc_posttypes.php' );
 * The Enque Function for the Jquery UI function of the metabox code below
 */
 function my_lccc_info_feed_scripts() {
+	wp_enqueue_style( 'lato-google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic', false ); 	
+	
 	wp_enqueue_script('jquery-ui-datepicker');
 	
 	wp_enqueue_script('jquery-ui-core');
@@ -107,9 +109,9 @@ function enqueue_foundation() {
  /*wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/foundation/js/foundation.min.js', array( 'jquery' ), '1', true );*/
  wp_enqueue_script( 'foundation-modernizr-js',  plugin_dir_url( __FILE__ ) . '/foundation/js/vendor/modernizr.js', array( 'jquery' ), '1', true );
                 
-/* Foudnation Init JS */
- wp_enqueue_script( 'foundation-init-js',  plugin_dir_url( __FILE__ ) . '/foundation.js', array( 'jquery', 'foundation-js' ), '1', true );
-	
+/* Foudnation Init JS 
+ wp_enqueue_script( 'foundation-init-js',  plugin_dir_url( __FILE__ ) . 'foundation.js', array( 'jquery', 'foundation-js' ), '1', true );
+	*/
 	  }
 add_action( 'wp_enqueue_scripts', 'enqueue_foundation' );
 
@@ -129,7 +131,7 @@ function custom_excerpt_length($length) {
     else if ($post->post_type == 'lccc_announcement')
     return 70;
     else
-    return 40;
+    return 20;
 }
 add_filter('excerpt_length', 'custom_excerpt_length');
 
