@@ -1,8 +1,10 @@
+
 .headerlogo i{color: #ffffff;
     font-size: 3.5rem;}
+.metabox-field-title{margin-bottom: 0;}
 .lccc_event_header {background-color: #003B76;}
 .column, .columns .lccc_announcement_header {padding: 0;}
-.widget h2.headertext{color: #fff;font-size: 1.9rem;line-height: 2.105263;margin-bottom: 0.5rem;}
+.widget h2.headertext{color: #fff;font-size: 1.9rem;line-height: 2.105263;margin-bottom: 0.5rem; margin-top: -4px;}
 .lccc-font-lccc-reverse:before {
     font-size: 4.0rem;
 }
@@ -17,3 +19,30 @@
 a.button, a.button, a.button.expand, a.button.expand{background-color: #003B76;}
 .eventcontainer{border-bottom: 1px inset #AAAAAA; margin-bottom: 10px;}
 .widget h2.announcementheader{font-size: 2.2rem;color: #003B76;}
+@media only screen and (max-width: 40em) { 
+.lccc_event .headerlogo {
+    padding-right: 0;
+    padding-left: 0;
+}
+	.widget h2.headertext {
+    color: #fff;
+    font-size: 1.9rem;
+    line-height: 2.105263;
+    margin-bottom: 0.5rem;
+    margin-top: -3px;
+}
+} /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+	.lccc_event{padding: 0;}
+	.lccc_event .headerlogo {
+    padding-right: 0;
+    padding-left: 0;
+}
+		.widget h2.headertext {
+    color: #fff;
+    font-size: 1.9rem;
+    line-height: 2.105263;
+    margin-bottom: 0.5rem;
+    margin-top: -3px;
+}
+} /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */

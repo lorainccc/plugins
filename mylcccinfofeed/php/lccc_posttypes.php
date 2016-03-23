@@ -91,7 +91,7 @@ function lcccevents_post_type() {
 		'label'                 => __( 'LCCC Event', 'text_domain' ),
 		'description'           => __( 'Post Type Description', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions', 'page-attributes',),
+		'supports'              => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', ),
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'hierarchical'          => false,
 		'public'                => true,

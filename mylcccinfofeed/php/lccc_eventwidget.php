@@ -52,7 +52,7 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 					if ( $newevents->have_posts() ) :
 									while ( $newevents->have_posts() ) : $newevents->the_post();
 			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
-								echo '<div class="small-12 medium-3 large-3 columns calender">';
+								echo '<div class="small-12 medium-12 large-3 columns calender">';
 												$eventdate = event_meta_box_get_meta(
 'event_meta_box_event_start_date_and_time_');
 												$date=strtotime($eventdate);
@@ -61,7 +61,7 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 								echo '<p class="month">'.$month.'</p>';
 								echo '<p class="day">'.$day.'</p>';
 								echo '</div>';
-								echo '<div class="small-12 medium-9 large-9 columns">';
+								echo '<div class="small-12 medium-12 large-9 columns">';
   						?>
 								<a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
 								<?php
@@ -71,31 +71,7 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 							endwhile;
 					endif;
 		}
-		if ($whattodisplay == 'lccc_announcement'){
-					$announcementargs=array(
-					'post_type' => $whattodisplay,
-					'post_status' => 'publish',
-  			'posts_per_page' => $numberofposts,
-					'order' => 'DESC',
-					'category_name' => $widgetcategory
-					);
-					$newevents = new WP_Query($announcementargs);
-					if ( $newevents->have_posts() ) :
-									while ( $newevents->have_posts() ) : $newevents->the_post();
-			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
-								echo '<div class="small-12 medium-3 large-3 columns eventhumbnail">';
-												the_post_thumbnail();
-								echo '</div>';
-								echo '<div class="small-12 medium-9 large-9 columns">';
-  						?>
-								<a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
-								<?php
-											the_excerpt('<p>','</p>');
-								echo '</div>';
-								echo '</div>';
-							endwhile;
-					endif;
-		}
+	
 		echo '</div>';
 		
 		if ($whattodisplay == 'lccc_event'){
