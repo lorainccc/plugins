@@ -151,6 +151,11 @@ function event_meta_box_save( $post_id ) {
 		$eventStartDate = $_POST['event_meta_box_event_start_date_and_time_'];
 		$date=strtotime($eventStartDate);
 		update_post_meta( $post_id, 'event_start_date', esc_attr( date('Y-m-d',$date) ) );
+	
+		$eventStartTime = $_POST['event_meta_box_event_start_date_and_time_'];
+		$date=strtotime($eventStartTime);
+		update_post_meta( $post_id, 'event_start_time', esc_attr( date('h:i a',$date) ) );
+	
 
 	if ( isset( $_POST['event_meta_box_event_end_date_and_time_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );
