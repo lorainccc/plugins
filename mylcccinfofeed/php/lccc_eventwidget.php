@@ -41,12 +41,68 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 			}
 	  
  if ($whattodisplay == 'lccc_event'){
+				$today = getdate();
+				$currentDay = $today['mday'];
+				$month = $today['mon'];
+				$year = $today['year'];
+				$firsteventdate ='';
+    $nexteventdate ='';
+				$todaysevents = '';
+				$temp = strLen($currentDay);            
+				$twoDay = '';
+	   $nextTwoDay = '';
+    if ($temp < 2){
+							$twoDay = '0' . $currentDay;
+				}else{
+							$twoDay = $currentDay;
+				}
+				$twomonth = '';
+    $tempmonth = strLen($month);
+    if ($tempmonth < 2){
+							$twomonth = '0' . $month;
+				}else{
+							$twomonth = $month;
+				}
+			 $nextDay = $currentDay + 1;
+				if ($temp < 2){
+							$nextTwoDay = '0' . $currentDay;
+				}else{
+							$nextTwoDay = $currentDay;
+				}
+     $today = "$year-$twomonth-$twoDay";
+					echo $today;
 					$eventargs=array(
 					'post_type' => $whattodisplay,
 					'post_status' => 'publish',
   			'posts_per_page' => $numberofposts,
-					'order' => 'DESC',
-					'category_name' => $widgetcategory
+					'category_name' => $widgetcategory,
+					'meta_query' => array(
+						 array(	
+													'relation' => 'OR', 
+													'start_date' => array(
+                  'key' => 'event_start_date',
+                  'value' => $today,
+                  'compare' => '<=',
+																		'type' => 'DATE',
+              ),
+																		'end_date' => array(
+                  'key' => 'event_end_date',
+                  'value' => $today,
+                  'compare' => '>=',
+																		'type' => 'DATE',
+              ),
+
+										),
+						   'relation' => 'AND', 
+									'time_order' => array(
+              'key' => 'event_start_time',
+              'compare' => 'EXISTS',
+         ), 			 
+							),
+						'orderby' => array(
+                  'start_date' => 'ASC',
+																		'time_order' => 'DESC',
+          ),
 					);
 					$newevents = new WP_Query($eventargs);
 					if ( $newevents->have_posts() ) :

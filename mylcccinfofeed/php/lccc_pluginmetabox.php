@@ -160,6 +160,11 @@ function event_meta_box_save( $post_id ) {
 	if ( isset( $_POST['event_meta_box_event_end_date_and_time_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );
 	
+$eventEndDate = $_POST['event_meta_box_event_end_date_and_time_'];
+$date=strtotime($eventEndDate);
+	update_post_meta( $post_id, 'event_end_date', esc_attr( date('Y-m-d',$date) ) );
+	
+	
 	if ( isset( $_POST['event_meta_box_ticket_price_s_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_ticket_price_s_', esc_attr( $_POST['event_meta_box_ticket_price_s_'] ) );
 	if ( isset( $_POST['event_meta_box_department_organization_sponsor_'] ) )
