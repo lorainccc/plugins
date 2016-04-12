@@ -70,30 +70,20 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 							$nextTwoDay = $currentDay;
 				}
      $today = "$year-$twomonth-$twoDay";
-					echo $today;
+					
 					$eventargs=array(
-					'post_type' => $whattodisplay,
+					'post_type' => 'lccc_event',
 					'post_status' => 'publish',
   			'posts_per_page' => $numberofposts,
 					'category_name' => $widgetcategory,
 					'meta_query' => array(
-						 array(	
-													'relation' => 'OR', 
+													'relation' => 'AND', 
 													'start_date' => array(
                   'key' => 'event_start_date',
-                  'value' => $today,
-                  'compare' => '<=',
+                  'compare' => 'EXISTS',
 																		'type' => 'DATE',
-              ),
-																		'end_date' => array(
-                  'key' => 'event_end_date',
-                  'value' => $today,
-                  'compare' => '>=',
-																		'type' => 'DATE',
-              ),
-
-										),
-						   'relation' => 'AND', 
+              ),									
+						 
 									'time_order' => array(
               'key' => 'event_start_time',
               'compare' => 'EXISTS',
@@ -101,48 +91,101 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 							),
 						'orderby' => array(
                   'start_date' => 'ASC',
-																		'time_order' => 'DESC',
+																		'time_order' => 'ASC',
           ),
 					);
 					$newevents = new WP_Query($eventargs);
 					if ( $newevents->have_posts() ) :
-									while ( $newevents->have_posts() ) : $newevents->the_post();
-			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
-								echo '<div class="small-12 medium-12 large-3 columns calender">';
-												$eventdate = event_meta_box_get_meta(
-'event_meta_box_event_start_date_and_time_');
-												$date=strtotime($eventdate);
-												$month=date("M",$date);
-												$day=date("d",$date);
-								echo '<p class="month">'.$month.'</p>';
-								echo '<p class="day">'.$day.'</p>';
-								echo '</div>';
-								echo '<div class="small-12 medium-12 large-9 columns">';
-  						?>
-								<a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
+							while ( $newevents->have_posts() ) : $newevents->the_post();
+							  $starteventdate = event_meta_box_get_meta('event_meta_box_event_start_date_and_time_');  
+								$endeventdate = event_meta_box_get_meta('event_meta_box_event_end_date_and_time_');  
+          $startdate=strtotime($starteventdate);
+										$starttime=	date("h:i a",$startdate);
+										$eventstartdate=date("Y-m-d",$startdate);
+										$eventstartmonth=date("M",$startdate);
+										$eventstartday =date("j",$startdate);
+ 									$starteventtimehours = date("G",$startdate);
+										$starteventtimeminutes = date("i",$startdate);								
+		
+										$enddate=strtotime($endeventdate);
+										$endeventdate = date("Y-m-d",$enddate);
+										$endeventtime = date("h:i a",$enddate);
+										$endeventtimehours = date("G",$enddate);
+										$endeventtimeminutes = date("i",$enddate);
+										
+		$duration = '';
+		if($endeventtimehours == 0){
+			$endeventtimehours =24;
+		}
+		$durationhours =	$endeventtimehours - $starteventtimehours;
+		if($durationhours > 0){
+				if($durationhours == 24){
+				$duration .= '1 day';
+				}else{
+				$duration .= $durationhours.'hrs'; 
+				}
+		}
+		$durationminutes = $endeventtimeminutes - $starteventtimeminutes;
+		if($durationminutes > 0){
+			$duration .= $durationminutes.'mins';
+		}
+										
+										$date=strtotime($today);
+										$today_event_month=date("M",$date);
+          $today_event_day=date("j",$date);
+		
+          //echo 'Today:'.$today.'<br />';
+										//echo 'Event Start Date and Time: '. $starteventdate.'<br />';
+										//echo 'Event Start:'.$eventstartdate.'<br />';
+										//echo 'Event Start Time:'.$starttime.'<br />';
+										//echo 'Event Start Month:'.$eventstartmonth.'<br />';
+										//echo 'Event Start Day:'.$eventstartday.'<br />';
+										//echo 'Event End Date:'.$endeventdate.'<br />';
+									
+				if( $eventstartdate <= $today && $endeventdate >= $today){
+							echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
+							echo '<div class="small-12 medium-12 large-3 columns calender">';
+							echo '<p class="month">'.$today_event_month.'</p>';
+							echo '<p class="day">'.$today_event_day.'</p>';
+							echo '</div>';
+							echo '<div class="small-12 medium-12 large-9 columns">';
+															?><a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
 								<?php
+							echo '<p style="font-weight: bold;margin-bottom: 0;">Start Time: '.$starttime.'</p>';	
+							echo '<p>Duration: '.$duration.'</p>';
 											the_excerpt('<p>','</p>');
-								echo '</div>';
-								echo '</div>';
+							echo '</div>';
+				
+							echo '</div>';
+					}
+					if( $eventstartdate >= $today){
+									echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
+							echo '<div class="small-12 medium-12 large-3 columns calender">';
+							echo '<p class="month">'.$eventstartmonth.'</p>';
+							echo '<p class="day">'.$eventstartday.'</p>';
+							echo '</div>';
+							echo '<div class="small-12 medium-12 large-9 columns">';
+													?><a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
+								<?php
+						echo '<p style="font-weight: bold;margin-bottom: 0;">Start Time: '.$starttime.'</p>';		
+					echo '<p>Duration: '.$duration.'</p>';
+											the_excerpt('<p>','</p>');
+
+							echo '</div>';
+				
+							echo '</div>';
+					}
 							endwhile;
 					endif;
 		}
 	
 		echo '</div>';
 		
-		if ($whattodisplay == 'lccc_event'){
-					$currentpostype = 'Events';
-			echo '<div class="small-12 medium-12 large-12 columns">';
-							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All '.$currentpostype .'</a>';
+		echo '<div class="small-12 medium-12 large-12 columns">';
+							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All Events </a>';
 		echo '</div>';
-		}
-		if ($whattodisplay == 'lccc_location'){
-					$currentpostype = 'Locations';
-			echo '<div class="small-12 medium-12 large-12 columns">';
-							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All '.$currentpostype .'</a>';
-		echo '</div>';
-		}
 		
+
   echo $after_widget;
 	}
 
