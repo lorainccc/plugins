@@ -27,7 +27,7 @@ function todayPosts($month, $currentDay, $year){
 				$args = array(
 						'post_type' => 'lccc_event',
 						'meta_key' => 'event_start_date',
-						'meta_value' => $year . '-' . $month . '-' . $twoDay,
+						'meta_value' => $year . '/' . $month . '/' . $twoDay,
 					'meta_value_num' => time(),
 						'orderby' =>'meta_value_num',
 						'compare' => 'BETWEEN',
@@ -41,11 +41,11 @@ function todayPosts($month, $currentDay, $year){
 										$todaysevents .= '<ul class="clanedardayseventslist">';
 										while ( $the_query->have_posts() ) {
 										$the_query->the_post();
-										$eventdate = event_meta_box_get_meta('event_meta_box_event_start_date_and_time_');	
+										$eventdate = event_meta_box_get_meta('event_start_date');	
 										$date=strtotime($eventdate);
 										$today_event_month=date("m",$date);
 										$today_event_day=date("j",$date);	
-										$todaysevents .= '<li><a href="'.get_the_permalink().'">'.get_the_title().'</a></li>';
+											$todaysevents .= '<li><a href="'.get_the_permalink().'">'.get_the_title().'</a></li>';
 									}
 									$todaysevents .= '</ul>';
 								} else {
@@ -104,7 +104,7 @@ function build_calendar($day,$month,$year){
 														$currentDayRel = str_pad($currentDay, 2, "0", STR_PAD_LEFT);
 
 														$date = "$year-$month-$currentDayRel";
-
+										
 														if ($date == date("Y-m-d")){
 															$calendar .= "<td class='day today' rel='$date'><span class='calendar-today'><a class='datelink-currentday' href='/day/?d=$date'>$currentDay</a></span><span class='event_entries'>".todayPosts($month,$currentDay,$year)."</span></td>";
 														}
@@ -197,7 +197,7 @@ function build_week($month,$year,$day) {
 					global $currentyeardisplayed;
 					global $prevstartday;
 					global $lastdate;
-			$month=$month;
+					$month=$month;
 					$year=$year;
      // Create array containing abbreviations of days of week.
      $daysOfWeek = array('Sun','Mon','Tues','Wed','Thurs','Fri','Sat');
@@ -214,8 +214,8 @@ function build_week($month,$year,$day) {
      // month in question.
      $dayOfWeek = $dateComponents['wday'];
        // Get today's date and extract the day of the month to start on.
-	 					$currentDay = $day;
-					// Create the table tag opener and day headers
+	 			$currentDay = $day;
+						// Create the table tag opener and day headers
     $week = "<h3 class='calendar-list-header'>Week Of $monthName $currentDay, $year</h3><br />";
 					$week .= "<ul class='calendarlist'>";
      //$week .= "<caption>$monthName $year</caption>";
@@ -225,10 +225,7 @@ function build_week($month,$year,$day) {
      //     $week .= "<th class='header'>$day</th>";
      //} 
      // Create the rest of the week
-     // Get today's date and extract the day of the month to start on.
-	    
-
-	
+ // Get today's date and extract the day of the month to start on.
      // Initiate the day counter, starting with the 1st.
 					//$currentDay = 1;
 	

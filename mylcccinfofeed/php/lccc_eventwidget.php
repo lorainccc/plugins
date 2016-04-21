@@ -97,21 +97,31 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 					$newevents = new WP_Query($eventargs);
 					if ( $newevents->have_posts() ) :
 							while ( $newevents->have_posts() ) : $newevents->the_post();
-							  $starteventdate = event_meta_box_get_meta('event_meta_box_event_start_date_and_time_');  
-								$endeventdate = event_meta_box_get_meta('event_meta_box_event_end_date_and_time_');  
+		$starteventdate = 
+			event_meta_box_get_meta('event_start_date');
+		$starteventtime = event_meta_box_get_meta('event_start_time');  
+		$endeventdate = event_meta_box_get_meta('event_end_date');
+		$endtime = event_meta_box_get_meta('event_end_time');
+		
+
+										$starttimevar=strtotime($starteventtime);
+										$starttime=	date("h:i a",$starttimevar);
+										$starteventtimehours = date("G",$starttimevar);
+										$starteventtimeminutes = date("i",$starttimevar);
+		
           $startdate=strtotime($starteventdate);
-										$starttime=	date("h:i a",$startdate);
 										$eventstartdate=date("Y-m-d",$startdate);
 										$eventstartmonth=date("M",$startdate);
-										$eventstartday =date("j",$startdate);
- 									$starteventtimehours = date("G",$startdate);
-										$starteventtimeminutes = date("i",$startdate);								
+										$eventstartday =date("j",$startdate);								
+										
+										$endeventtimevar=strtotime($endtime);
+										$endeventtime = date("h:i a",$endeventtimevar);
+										$endeventtimehours = date("G",$endeventtimevar);
+										$endeventtimeminutes = date("i",$endeventtimevar);
 		
 										$enddate=strtotime($endeventdate);
 										$endeventdate = date("Y-m-d",$enddate);
-										$endeventtime = date("h:i a",$enddate);
-										$endeventtimehours = date("G",$enddate);
-										$endeventtimeminutes = date("i",$enddate);
+		
 										
 		$duration = '';
 		if($endeventtimehours == 0){
@@ -133,7 +143,6 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 										$date=strtotime($today);
 										$today_event_month=date("M",$date);
           $today_event_day=date("j",$date);
-		
           //echo 'Today:'.$today.'<br />';
 										//echo 'Event Start Date and Time: '. $starteventdate.'<br />';
 										//echo 'Event Start:'.$eventstartdate.'<br />';
