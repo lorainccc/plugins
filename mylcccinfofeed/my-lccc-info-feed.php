@@ -135,4 +135,8 @@ function custom_excerpt_length($length) {
 }
 add_filter('excerpt_length', 'custom_excerpt_length');
 
+// MyCampus Guest Page Image Background Size
+
+add_image_size( 'mycampus_background', 1600, 1068);
+
 ?>
