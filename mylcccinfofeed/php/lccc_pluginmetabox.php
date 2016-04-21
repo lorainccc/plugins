@@ -35,46 +35,62 @@ function event_meta_box_html( $post) {
 	
 <script>
 jQuery(document).ready(function(){
-jQuery('#event_meta_box_event_start_date_and_time_').datetimepicker({
-	dateFormat: "mm/dd/yy", timeFormat: "hh:mm tt"
+jQuery('#event_start_date').datepicker({
+	dateFormat: "mm/dd/yy"
 });
-jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
-	dateFormat: "mm/dd/yy", timeFormat: "hh:mm tt"
+jQuery('#event_start_time').timepicker({
+	timeFormat: "hh:mm tt"
 });
+jQuery('#event_end_date').datepicker({
+	dateFormat: "mm/dd/yy"
+});
+jQuery('#event_end_time').timepicker({
+	timeFormat: "hh:mm tt"
+});	
 
 });
 </script>
 
 <h4>Submitted by:</h4>
 	<p>
-		<label for="event_meta_box_name"><?php _e( 'Name', 'event_meta_box' ); ?></label><br>
+		<label for="event_meta_box_name"><?php _e( 'Your Name', 'event_meta_box' ); ?></label><br>
 		<input class="widefat" type="text" name="event_meta_box_name" id="event_meta_box_name" value="<?php echo event_meta_box_get_meta( 'event_meta_box_name' ); ?>">
 	
-	</p>	<p>
-		<label for="event_meta_box_phone"><?php _e( 'Phone', 'event_meta_box' ); ?></label><br>
-		<input class="widefat"  type="text" name="event_meta_box_phone" id="event_meta_box_phone" value="<?php echo event_meta_box_get_meta( 'event_meta_box_phone' ); ?>">
-	
-	</p>	<p>
+	</p>	
+<p>
 		<label for="event_meta_box_e_mail"><?php _e( 'E-Mail', 'event_meta_box' ); ?></label><br>
 		<input class="widefat"  type="text" name="event_meta_box_e_mail" id="event_meta_box_e_mail" value="<?php echo event_meta_box_get_meta( 'event_meta_box_e_mail' ); ?>">
 	
-	</p>	<p>
+	</p>
+<p>
+		<label for="event_meta_box_phone"><?php _e( 'Phone', 'event_meta_box' ); ?></label><br>
+		<input class="widefat"  type="text" name="event_meta_box_phone" id="event_meta_box_phone" value="<?php echo event_meta_box_get_meta( 'event_meta_box_phone' ); ?>">
+	
+	</p>		
+	<p>
+		<label for="event_meta_box_department_organization_sponsor_"><?php _e( 'Sponsoring/Host Department or Organization:', 'event_meta_box' ); ?></label><br>
+		<input class="widefat"  type="text" name="event_meta_box_department_organization_sponsor_" id="event_meta_box_department_organization_sponsor_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_department_organization_sponsor_' ); ?>">
+	</p>
+<p>
 <br>
 	<p>
-<h4>Audience:</h4>
+<h4 class="metabox-field-title">Audience:</h4>
+
 	<p>
+		<input type="checkbox" name="event_meta_box_employee" id="event_meta_box_employee" value="LCCC Employees" <?php echo ( event_meta_box_get_meta( 'event_meta_box_employee' ) === 'LCCC Employees' ) ? 'checked' : ''; ?>>
+		<label for="event_meta_box_employee"><?php _e( 'LCCC Employees', 'lccc_event_metabox' ); ?></label>	
+</p>	
+<p>
+		<input type="checkbox" name="event_meta_box_community" id="event_meta_box_community" value="Community and Perspective Students" <?php echo ( event_meta_box_get_meta( 'event_meta_box_community' ) === 'Community and Perspective Students' ) ? 'checked' : ''; ?>>
+		<label for="event_meta_box_community"><?php _e( 'Community and Perspective Students', 'lccc_event_metabox' ); ?></label>	
+</p>
+		<p>
+		<input type="checkbox" name="event_meta_box_students" id="event_meta_box_students" value="LCCC Students" <?php echo ( event_meta_box_get_meta( 'event_meta_box_students' ) === 'LCCC Students' ) ? 'checked' : ''; ?>>
+		<label for="event_meta_box_students"><?php _e( 'LCCC Students', 'lccc_event_metabox' ); ?></label>	
+</p>
 
-		<input type="checkbox" name="event_meta_box_employee" id="event_meta_box_employee" value="employee" <?php echo ( event_meta_box_get_meta( 'event_meta_box_employee' ) === 'employee' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_employee"><?php _e( 'Employee', 'lccc_event_metabox' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_community" id="event_meta_box_community" value="community" <?php echo ( event_meta_box_get_meta( 'event_meta_box_community' ) === 'community' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_community"><?php _e( 'Community', 'lccc_event_metabox' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_students" id="event_meta_box_students" value="students" <?php echo ( event_meta_box_get_meta( 'event_meta_box_students' ) === 'students' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_students"><?php _e( 'Students', 'lccc_event_metabox' ); ?></label>	</p>
-
-<label for="event_meta_box_event_location"><?php _e( 'Event Location', 'event_meta_box' ); ?></label><br>
-	 <select name='event_meta_box_event_location' id='event_meta_box_event_location'>
+<h4 class="metabox-field-title">Event Location</h4><br>
+<select name='event_meta_box_event_location' id='event_meta_box_event_location'>
  		<?php 
 			$mypages = get_pages('post_type=lccc_location');
 			foreach($mypages as $page)
@@ -83,22 +99,46 @@ jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
 			}
 			?>
 </select>
-	<p>
-		<label for="event_meta_box_event_start_date_and_time_"><?php _e( 'Event Start date and time:', 'event_meta_box' ); ?></label><br>
-		<input type="text" name="event_meta_box_event_start_date_and_time_" id="event_meta_box_event_start_date_and_time_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' ); ?>">
-	</p>	<p>
-		<label for="event_meta_box_event_end_date_and_time_"><?php _e( 'Event End date and time:', 'event_meta_box' ); ?></label><br>
-		<input type="text" name="event_meta_box_event_end_date_and_time_" id="event_meta_box_event_end_date_and_time_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_end_date_and_time_' ); ?>">
-	</p>	<p>
-		<label for="event_meta_box_ticket_price_s_"><?php _e( 'Ticket Price(s):', 'event_meta_box' ); ?></label><br>
+<h4 class="metabox-field-title">Ticket Price(s):</h4>
+<p>
 		<input type="text" name="event_meta_box_ticket_price_s_" id="event_meta_box_ticket_price_s_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_ticket_price_s_' ); ?>">
-	</p>	<p>
-		<label for="event_meta_box_department_organization_sponsor_"><?php _e( 'Department/Organization Sponsor:', 'event_meta_box' ); ?></label><br>
-		<input class="widefat"  type="text" name="event_meta_box_department_organization_sponsor_" id="event_meta_box_department_organization_sponsor_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_department_organization_sponsor_' ); ?>">
-	</p>	<p>
-		<label for="event_meta_box_associated_web_address_"><?php _e( 'Associated Web Address:', 'event_meta_box' ); ?></label><br>
+	</p>
+<h4 class="metabox-field-title">Event Dates and Times:</h4>
+
+<p>		
+		<label for="event_start_date"><?php _e( 'Event Start date:', 'event_meta_box' ); ?></label><br>
+		<input type="text" name="event_start_date" id="event_start_date" value="<?php echo event_meta_box_get_meta( 'event_start_date' ); ?>">
+	</p>
+
+<p>		
+		<label for="event_start_time"><?php _e( 'Event Start time:', 'event_meta_box' ); ?></label><br>
+		<input type="text" name="event_start_time" id="event_start_time" value="<?php echo event_meta_box_get_meta( 'event_start_time' ); ?>">
+	</p>
+
+<p>
+		<label for="event_end_date"><?php _e( 'Event End date:', 'event_meta_box' ); ?></label><br>
+		<input type="text" name="event_end_date" id="event_end_date" value="<?php echo event_meta_box_get_meta( 'event_end_date' ); ?>">
+	</p>	
+
+<p>
+		<label for="event_end_time"><?php _e( 'Event End time:', 'event_meta_box' ); ?></label><br>
+		<input type="text" name="event_end_time" id="event_end_time" value="<?php echo event_meta_box_get_meta( 'event_end_time' ); ?>">
+	</p>	
+
+<h4 class="metabox-field-title">Who should your audience contact for more information?</h4>
+<p>
+			<label for="lccc_event_contact_name"><?php _e( 'Name:', 'event_meta_box' ); ?></label><br>
+			<input class="widefat"  type="text" name="lccc_event_contact_name" id="lccc_event_contact_name" value="<?php echo event_meta_box_get_meta( 'lccc_event_contact_name' ); ?>">
+		<label for="event_meta_box_contact_phone_"><?php _e( 'Phone:', 'event_meta_box' ); ?></label><br>
+		<input class="widefat"  type="text" name="event_meta_box_contact_phone_" id="event_meta_box_contact_phone_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_contact_phone_' ); ?>">
+		<label for="event_meta_box_contact_email"><?php _e( 'Email:', 'event_meta_box' ); ?></label><br>
+		<input class="widefat"  type="text" name="event_meta_box_contact_email" id="event_meta_box_contact_email" value="<?php echo event_meta_box_get_meta( 'event_meta_box_contact_email' ); ?>">
+
+	<label for="event_meta_box_associated_web_address_"><?php _e( 'Website:', 'event_meta_box' ); ?></label><br>
 		<input class="widefat"  type="text" name="event_meta_box_associated_web_address_" id="event_meta_box_associated_web_address_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_associated_web_address_' ); ?>">
-	</p><?php
+	</p>
+
+<?php
 }
 
 function event_meta_box_save( $post_id ) {
@@ -113,6 +153,7 @@ function event_meta_box_save( $post_id ) {
 	if ( isset( $_POST['event_meta_box_e_mail'] ) )
 		update_post_meta( $post_id, 'event_meta_box_e_mail', esc_attr( $_POST['event_meta_box_e_mail'] ) );
 	
+	
 	if ( isset( $_POST['event_meta_box_employee'] ) )
 		update_post_meta( $post_id, 'event_meta_box_employee', esc_attr( $_POST['event_meta_box_employee'] ) );
 	else
@@ -121,29 +162,48 @@ function event_meta_box_save( $post_id ) {
 		update_post_meta( $post_id, 'event_meta_box_community', esc_attr( $_POST['event_meta_box_community'] ) );
 	else
 		update_post_meta( $post_id, 'event_meta_box_community', null );
+	
 	if ( isset( $_POST['event_meta_box_students'] ) )
 		update_post_meta( $post_id, 'event_meta_box_students', esc_attr( $_POST['event_meta_box_students'] ) );
 	else
 		update_post_meta( $post_id, 'event_meta_box_students', null );
-	
+
 	if ( isset( $_POST['event_meta_box_event_location'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_location', esc_attr( $_POST['event_meta_box_event_location'] ) );
 	
-	if ( isset( $_POST['event_meta_box_event_start_date_and_time_'] ) )
-   update_post_meta( $post_id, 'event_meta_box_event_start_date_and_time_', esc_attr( $_POST['event_meta_box_event_start_date_and_time_'] ) );             
-		$eventStartDate = $_POST['event_meta_box_event_start_date_and_time_'];
-		$date=strtotime($eventStartDate);
-		update_post_meta( $post_id, 'event_start_date', esc_attr( date('Y-m-d',$date) ) );
+	if ( isset( $_POST['event_start_date'] ) )
+   update_post_meta( $post_id, 'event_start_date', esc_attr( $_POST['event_start_date'] ) );
+	
+if ( isset( $_POST['event_start_time'] ) )
+   update_post_meta( $post_id, 'event_start_time', esc_attr( $_POST['event_start_time'] ) ); 
+	
+	if ( isset( $_POST['event_end_date'] ) )
+   update_post_meta( $post_id, 'event_end_date', esc_attr( $_POST['event_end_date'] ) ); 
+	
+	if ( isset( $_POST['event_end_time'] ) )
+   update_post_meta( $post_id, 'event_end_time', esc_attr( $_POST['event_end_time'] ) ); 	
 
 	if ( isset( $_POST['event_meta_box_event_end_date_and_time_'] ) )
-		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );
+		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );	
 	
 	if ( isset( $_POST['event_meta_box_ticket_price_s_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_ticket_price_s_', esc_attr( $_POST['event_meta_box_ticket_price_s_'] ) );
 	if ( isset( $_POST['event_meta_box_department_organization_sponsor_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_department_organization_sponsor_', esc_attr( $_POST['event_meta_box_department_organization_sponsor_'] ) );
+	
+	
+	if ( isset( $_POST['lccc_event_contact_name'] ) )
+		update_post_meta( $post_id, 'lccc_event_contact_name', esc_attr( $_POST['lccc_event_contact_name'] ) );	
+		
+	if ( isset( $_POST['event_meta_box_contact_phone_'] ) )
+		update_post_meta( $post_id, 'event_meta_box_contact_phone_', esc_attr( $_POST['event_meta_box_contact_phone_'] ) );
+	
+	if ( isset( $_POST['event_meta_box_contact_email'] ) )
+		update_post_meta( $post_id, 'event_meta_box_contact_email', esc_attr( $_POST['event_meta_box_contact_email'] ) );
+	
 	if ( isset( $_POST['event_meta_box_associated_web_address_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_associated_web_address_', esc_attr( $_POST['event_meta_box_associated_web_address_'] ) );
+	
 	if ( isset( $_POST['event_meta_box_display_start_date_and_time'] ) )
 		update_post_meta( $post_id, 'event_meta_box_display_start_date_and_time', esc_attr( $_POST['event_meta_box_display_start_date_and_time'] ) );
 	if ( isset( $_POST['event_meta_box_display_end_date_and_time'] ) )

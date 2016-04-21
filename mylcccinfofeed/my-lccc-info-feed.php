@@ -117,9 +117,13 @@ add_action( 'wp_enqueue_scripts', 'enqueue_foundation' );
 
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_pluginmetabox.php' );
 
+require_once( plugin_dir_path( __FILE__ ).'php/displayfunctions.php' );
+
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_eventwidget.php' );
 
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_announcementwidget.php' );
+
+
 
 
 // CHANGE EXCERPT LENGTH FOR DIFFERENT POST TYPES
@@ -134,9 +138,5 @@ function custom_excerpt_length($length) {
     return 20;
 }
 add_filter('excerpt_length', 'custom_excerpt_length');
-
-// MyCampus Guest Page Image Background Size
-
-add_image_size( 'mycampus_background', 1600, 1068);
 
 ?>

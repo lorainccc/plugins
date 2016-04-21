@@ -50,8 +50,31 @@ class LCCC_Whats_Going_On_Announcement_Widget extends WP_Widget {
 					'post_type' => $whattodisplay,
 					'post_status' => 'publish',
   			'posts_per_page' => $numberofposts,
-					'order' => 'DESC',
-					'category_name' => $widgetcategory
+					'category_name' => $widgetcategory,
+					'meta_query' => array(
+                'relation' => 'AND',
+                array(
+																					'relation' => 'OR',
+																				'start_date_order' => array(
+                       'key' => 'event_start_date',
+                       'value' => $today,
+                       'compare' => '>=',
+                 				),
+																				'end_date_order' => array(
+                       'key' => 'event_end_date',
+                       'value' => $today,
+                       'compare' => '<=',
+                 				),
+																	),
+                 'time_order' => array(
+                    'key' => 'event_start_time',
+                    'compare' => 'EXISTS',
+                 ),    
+     ),
+					'orderby' => array(
+                  'start_date_order' => 'ASC',
+                  'time_order' => 'ASC',
+          ),
 					);
 					$newevents = new WP_Query($announcementargs);
 					if ( $newevents->have_posts() ) :
