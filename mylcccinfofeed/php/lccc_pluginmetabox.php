@@ -35,19 +35,11 @@ function event_meta_box_html( $post) {
 	
 <script>
 jQuery(document).ready(function(){
-<<<<<<< HEAD
 jQuery('#event_start_date').datepicker({
 	dateFormat: "mm/dd/yy"
 });
 jQuery('#event_start_time').timepicker({
 	timeFormat: "hh:mm tt"
-=======
-jQuery('#event_meta_box_event_start_date_and_time_').datetimepicker({
-	dateFormat: "mm/dd/yy", timeFormat: "hh:mm tt"
-});
-jQuery('#event_meta_box_event_end_date_and_time_').datetimepicker({
-	dateFormat: "mm/dd/yy", timeFormat: "hh:mm tt"
->>>>>>> refs/remotes/origin/master
 });
 jQuery('#event_end_date').datepicker({
 	dateFormat: "mm/dd/yy"
@@ -69,7 +61,6 @@ jQuery('#event_end_time').timepicker({
 		<label for="event_meta_box_e_mail"><?php _e( 'E-Mail', 'event_meta_box' ); ?></label><br>
 		<input class="widefat"  type="text" name="event_meta_box_e_mail" id="event_meta_box_e_mail" value="<?php echo event_meta_box_get_meta( 'event_meta_box_e_mail' ); ?>">
 	
-<<<<<<< HEAD
 	</p>
 <p>
 		<label for="event_meta_box_phone"><?php _e( 'Phone', 'event_meta_box' ); ?></label><br>
@@ -84,22 +75,6 @@ jQuery('#event_end_time').timepicker({
 <br>
 	<p>
 <h4 class="metabox-field-title">Audience:</h4>
-=======
-	</p>	<p>
-<br>
-	<p>
-<h4>Audience:</h4>
-	<p>
-
-		<input type="checkbox" name="event_meta_box_employee" id="event_meta_box_employee" value="employee" <?php echo ( event_meta_box_get_meta( 'event_meta_box_employee' ) === 'employee' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_employee"><?php _e( 'Employee', 'lccc_event_metabox' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_community" id="event_meta_box_community" value="community" <?php echo ( event_meta_box_get_meta( 'event_meta_box_community' ) === 'community' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_community"><?php _e( 'Community', 'lccc_event_metabox' ); ?></label>	</p>	<p>
-
-		<input type="checkbox" name="event_meta_box_students" id="event_meta_box_students" value="students" <?php echo ( event_meta_box_get_meta( 'event_meta_box_students' ) === 'students' ) ? 'checked' : ''; ?>>
-		<label for="event_meta_box_students"><?php _e( 'Students', 'lccc_event_metabox' ); ?></label>	</p>
->>>>>>> refs/remotes/origin/master
 
 	<p>
 		<input type="checkbox" name="event_meta_box_employee" id="event_meta_box_employee" value="LCCC Employees" <?php echo ( event_meta_box_get_meta( 'event_meta_box_employee' ) === 'LCCC Employees' ) ? 'checked' : ''; ?>>
@@ -124,19 +99,8 @@ jQuery('#event_end_time').timepicker({
 			}
 			?>
 </select>
-<<<<<<< HEAD
 <h4 class="metabox-field-title">Ticket Price(s):</h4>
 <p>
-=======
-	<p>
-		<label for="event_meta_box_event_start_date_and_time_"><?php _e( 'Event Start date and time:', 'event_meta_box' ); ?></label><br>
-		<input type="text" name="event_meta_box_event_start_date_and_time_" id="event_meta_box_event_start_date_and_time_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_start_date_and_time_' ); ?>">
-	</p>	<p>
-		<label for="event_meta_box_event_end_date_and_time_"><?php _e( 'Event End date and time:', 'event_meta_box' ); ?></label><br>
-		<input type="text" name="event_meta_box_event_end_date_and_time_" id="event_meta_box_event_end_date_and_time_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_end_date_and_time_' ); ?>">
-	</p>	<p>
-		<label for="event_meta_box_ticket_price_s_"><?php _e( 'Ticket Price(s):', 'event_meta_box' ); ?></label><br>
->>>>>>> refs/remotes/origin/master
 		<input type="text" name="event_meta_box_ticket_price_s_" id="event_meta_box_ticket_price_s_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_ticket_price_s_' ); ?>">
 	</p>
 <h4 class="metabox-field-title">Event Dates and Times:</h4>
@@ -189,7 +153,6 @@ function event_meta_box_save( $post_id ) {
 	if ( isset( $_POST['event_meta_box_e_mail'] ) )
 		update_post_meta( $post_id, 'event_meta_box_e_mail', esc_attr( $_POST['event_meta_box_e_mail'] ) );
 	
-<<<<<<< HEAD
 	
 	if ( isset( $_POST['event_meta_box_employee'] ) )
 		update_post_meta( $post_id, 'event_meta_box_employee', esc_attr( $_POST['event_meta_box_employee'] ) );
@@ -199,20 +162,6 @@ function event_meta_box_save( $post_id ) {
 		update_post_meta( $post_id, 'event_meta_box_community', esc_attr( $_POST['event_meta_box_community'] ) );
 	else
 		update_post_meta( $post_id, 'event_meta_box_community', null );
-=======
-	if ( isset( $_POST['event_meta_box_employee'] ) )
-		update_post_meta( $post_id, 'event_meta_box_employee', esc_attr( $_POST['event_meta_box_employee'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_employee', null );
-	if ( isset( $_POST['event_meta_box_community'] ) )
-		update_post_meta( $post_id, 'event_meta_box_community', esc_attr( $_POST['event_meta_box_community'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_community', null );
-	if ( isset( $_POST['event_meta_box_students'] ) )
-		update_post_meta( $post_id, 'event_meta_box_students', esc_attr( $_POST['event_meta_box_students'] ) );
-	else
-		update_post_meta( $post_id, 'event_meta_box_students', null );
->>>>>>> refs/remotes/origin/master
 	
 	if ( isset( $_POST['event_meta_box_students'] ) )
 		update_post_meta( $post_id, 'event_meta_box_students', esc_attr( $_POST['event_meta_box_students'] ) );
@@ -222,7 +171,6 @@ function event_meta_box_save( $post_id ) {
 	if ( isset( $_POST['event_meta_box_event_location'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_location', esc_attr( $_POST['event_meta_box_event_location'] ) );
 	
-<<<<<<< HEAD
 	if ( isset( $_POST['event_start_date'] ) )
    update_post_meta( $post_id, 'event_start_date', esc_attr( $_POST['event_start_date'] ) );
 	
@@ -234,13 +182,6 @@ if ( isset( $_POST['event_start_time'] ) )
 	
 	if ( isset( $_POST['event_end_time'] ) )
    update_post_meta( $post_id, 'event_end_time', esc_attr( $_POST['event_end_time'] ) ); 	
-=======
-	if ( isset( $_POST['event_meta_box_event_start_date_and_time_'] ) )
-   update_post_meta( $post_id, 'event_meta_box_event_start_date_and_time_', esc_attr( $_POST['event_meta_box_event_start_date_and_time_'] ) );             
-		$eventStartDate = $_POST['event_meta_box_event_start_date_and_time_'];
-		$date=strtotime($eventStartDate);
-		update_post_meta( $post_id, 'event_start_date', esc_attr( date('Y-m-d',$date) ) );
->>>>>>> refs/remotes/origin/master
 
 	if ( isset( $_POST['event_meta_box_event_end_date_and_time_'] ) )
 		update_post_meta( $post_id, 'event_meta_box_event_end_date_and_time_', esc_attr( $_POST['event_meta_box_event_end_date_and_time_'] ) );	
