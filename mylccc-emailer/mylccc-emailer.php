@@ -73,3 +73,11 @@ function run_mylccc_emailer() {
 
 }
 run_mylccc_emailer();
+
+/**
+	*	Emailer Custom Post Type
+	*
+	*	@since 1.0.0
+	*/
+
+	require_once( plugin_dir_path( __FILE__ ) . '/php/mylccc-emailer.php' );
