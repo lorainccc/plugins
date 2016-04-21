@@ -96,6 +96,7 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 					);
 					$newevents = new WP_Query($eventargs);
 					if ( $newevents->have_posts() ) :
+<<<<<<< HEAD
 							while ( $newevents->have_posts() ) : $newevents->the_post();
 		$starteventdate = 
 			event_meta_box_get_meta('event_start_date');
@@ -175,6 +176,22 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 							echo '</div>';
 							echo '<div class="small-12 medium-12 large-9 columns">';
 													?><a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
+=======
+									while ( $newevents->have_posts() ) : $newevents->the_post();
+			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
+								echo '<div class="small-12 medium-12 large-3 columns calender">';
+												$eventdate = event_meta_box_get_meta(
+'event_meta_box_event_start_date_and_time_');
+												$date=strtotime($eventdate);
+												$month=date("M",$date);
+												$day=date("d",$date);
+								echo '<p class="month">'.$month.'</p>';
+								echo '<p class="day">'.$day.'</p>';
+								echo '</div>';
+								echo '<div class="small-12 medium-12 large-9 columns">';
+  						?>
+								<a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
+>>>>>>> refs/remotes/origin/master
 								<?php
 						echo '<p style="font-weight: bold;margin-bottom: 0;">Start Time: '.$starttime.'</p>';		
 					echo '<p>Duration: '.$duration.'</p>';
