@@ -80,4 +80,5 @@ run_mylccc_emailer();
 	*	@since 1.0.0
 	*/
 
-	require_once( plugin_dir_path( __FILE__ ) . '/php/mylccc-emailer.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'php/email-post-type.php' );
+	require_once( plugin_dir_path( __FILE__ ) . 'php/email-metabox.php' );

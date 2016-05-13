@@ -54,6 +54,7 @@ function mylccc_email() {
 		'exclude_from_search'   => true,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'post',
+		
 	);
 	register_post_type( 'mylccc_email', $args );
 
