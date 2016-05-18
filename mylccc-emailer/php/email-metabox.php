@@ -39,18 +39,18 @@
 
 	<?php wp_nonce_field( basename( __FILE__ ), 'lc_emailer_post_date_nonce' ); ?>
 
-<script type="text/javascript">
-jQuery(document).ready(function() {
-    jQuery('#lc_emailer_post_date_field').datepicker({
-        dateFormat: "yy-mm-dd"
-    });
-});
-</script>
+	<script type="text/javascript">
+	jQuery(document).ready(function() {
+					jQuery('#lc_emailer_post_date_field').datepicker({
+									dateFormat: "yy-mm-dd"
+					});
+	});
+	</script>
 
 	<p>
 		<label for="lc_emailer_post_date_field"><?php _e( "Choose the date of the posts to include: ", "mylccc" ); ?></label>
 		<input type="text" name="lc_emailer_post_date_field" id="lc_emailer_post_date_field" value="<?php echo esc_attr( get_post_meta( $object->ID, 'lc_emailer_post_date', true ) ); ?>" size="30" />
-</p>
+	</p>
 
 <?php
 	}
