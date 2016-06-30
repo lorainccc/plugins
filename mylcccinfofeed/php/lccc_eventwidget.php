@@ -31,10 +31,10 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 		 echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'">';
 		 if ($whattodisplay == 'lccc_event'){
    echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
-							echo '<div class="small-4 medium-4 large-4 columns '.$whattodisplay.' headerlogo">';
+							echo '<div class="small-5 medium-5 large-5 columns '.$whattodisplay.' headerlogo">';
 											echo '<i class="lccc-font-lccc-reverse">'.'</i>';
 							echo '</div>';
-							echo '<div class="small-8 medium-8 large-8 columns ">';
+							echo '<div class="small-7 medium-7 large-7 columns event-header-text-container">';
 										echo '<h2 class="headertext">'.'Events'.'</h2>';
 							echo '</div>';
 			echo '</div>';
@@ -164,8 +164,9 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 							echo '<p>Duration: '.$duration.'</p>';
 											the_excerpt('<p>','</p>');
 							echo '</div>';
-				
+
 							echo '</div>';
+
 					}
 					if( $eventstartdate >= $today){
 									echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
@@ -179,20 +180,22 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 						echo '<p style="font-weight: bold;margin-bottom: 0;">Start Time: '.$starttime.'</p>';		
 					echo '<p>Duration: '.$duration.'</p>';
 											the_excerpt('<p>','</p>');
+				echo '<div class="event-divider"></div>';				
+							echo '</div>';
+		
+							echo '</div>';
 
-							echo '</div>';
-				
-							echo '</div>';
+						
 					}
 							endwhile;
 					endif;
 		}
-	
+		echo '<div class="small-12 medium-12 large-12 columns view-all-link">';
+							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All Events </a>';
+		echo '</div>';	
 		echo '</div>';
 		
-		echo '<div class="small-12 medium-12 large-12 columns">';
-							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All Events </a>';
-		echo '</div>';
+
 		
 
   echo $after_widget;

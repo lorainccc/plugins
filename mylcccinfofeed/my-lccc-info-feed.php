@@ -85,30 +85,30 @@ function my_lccc_info_feed_scripts() {
 	
 	wp_enqueue_script('jquery-ui-core');
 	
-	wp_enqueue_script( 'jquery-ui-timepicker-addon-js', plugin_dir_url( __FILE__ ) . '/js/jquery-ui-timepicker-addon.js', array( 'jquery','jquery-ui-core','jquery-ui-datepicker' ), '1', true );
+	wp_enqueue_script( 'jquery-ui-timepicker-addon-js', plugin_dir_url( __FILE__ ) . 'js/jquery-ui-timepicker-addon.js', array( 'jquery','jquery-ui-core','jquery-ui-datepicker' ), '1', true );
 	
 wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 
-	wp_enqueue_style('jquery-ui-timepicker-addon-style', plugin_dir_url( __FILE__ ) . '/css/jquery-ui-timepicker-addon.css');
+	wp_enqueue_style('jquery-ui-timepicker-addon-style', plugin_dir_url( __FILE__ ) . 'css/jquery-ui-timepicker-addon.css');
 	
-	wp_enqueue_style('my_lccc_info_feed_style', plugin_dir_url( __FILE__ ) . '/css/my_lccc_info_feed_styles.css');
+	wp_enqueue_style('my_lccc_info_feed_style', plugin_dir_url( __FILE__ ) . 'css/my_lccc_info_feed_styles.css');
 	
-		wp_enqueue_style('my_lccc_font', plugin_dir_url( __FILE__ ) . '/fonts/styles.css');
+		wp_enqueue_style('my_lccc_font', plugin_dir_url( __FILE__ ) . 'fonts/styles.css');
 	
 }
 add_action ('init','my_lccc_info_feed_scripts');
 
 function enqueue_foundation() {
-                /* Add Foundation CSS */
-       
-                wp_enqueue_style( 'foundation-normalize',  plugin_dir_url( __FILE__ ) . '/foundation/css/normalizemin.css' );
+/* Add Foundation CSS 
+ wp_enqueue_style( 'foundation-normalize',  plugin_dir_url( __FILE__ ) . '/foundation/css/normalizemin.css' );
  wp_enqueue_style( 'foundation',  plugin_dir_url( __FILE__ ) . '/foundation/css/foundation.min.css' );
- 
+ */
+       
 /* Add Foundation JS */
                 
- /*wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/foundation/js/foundation.min.js', array( 'jquery' ), '1', true );*/
+ /*wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/foundation/js/foundation.min.js', array( 'jquery' ), '1', true );
  wp_enqueue_script( 'foundation-modernizr-js',  plugin_dir_url( __FILE__ ) . '/foundation/js/vendor/modernizr.js', array( 'jquery' ), '1', true );
-                
+ */               
 /* Foudnation Init JS 
  wp_enqueue_script( 'foundation-init-js',  plugin_dir_url( __FILE__ ) . 'foundation.js', array( 'jquery', 'foundation-js' ), '1', true );
 	*/

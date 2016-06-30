@@ -44,42 +44,19 @@ class LCCC_Whats_Going_On_Announcement_Widget extends WP_Widget {
 						echo '<h2 class="announcementheader">'.'In The News'.'</h2>';				
 			echo '</div>';
 			}
-	  
+	  	$today = getdate();
 		if ($whattodisplay == 'lccc_announcement'){
 					$announcementargs=array(
 					'post_type' => $whattodisplay,
 					'post_status' => 'publish',
   			'posts_per_page' => $numberofposts,
 					'category_name' => $widgetcategory,
-					'meta_query' => array(
-                'relation' => 'AND',
-                array(
-																					'relation' => 'OR',
-																				'start_date_order' => array(
-                       'key' => 'event_start_date',
-                       'value' => $today,
-                       'compare' => '>=',
-                 				),
-																				'end_date_order' => array(
-                       'key' => 'event_end_date',
-                       'value' => $today,
-                       'compare' => '<=',
-                 				),
-																	),
-                 'time_order' => array(
-                    'key' => 'event_start_time',
-                    'compare' => 'EXISTS',
-                 ),    
-     ),
-					'orderby' => array(
-                  'start_date_order' => 'ASC',
-                  'time_order' => 'ASC',
-          ),
+
 					);
 					$newevents = new WP_Query($announcementargs);
 					if ( $newevents->have_posts() ) :
 									while ( $newevents->have_posts() ) : $newevents->the_post();
-			echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
+			echo '<div class="small-12 medium-12 large-12 columns news-container">';
 								echo '<div class="small-12 medium-3 large-3 columns eventhumbnail">';
 												the_post_thumbnail();
 								echo '</div>';
@@ -89,6 +66,9 @@ class LCCC_Whats_Going_On_Announcement_Widget extends WP_Widget {
 								<?php
 											the_excerpt('<p>','</p>');
 								echo '</div>';
+			  			echo '<div class="column row">';
+    								echo '<hr />';
+  						echo '</div>';
 								echo '</div>';
 							endwhile;
 					endif;
@@ -96,7 +76,7 @@ class LCCC_Whats_Going_On_Announcement_Widget extends WP_Widget {
 		if ($whattodisplay == 'lccc_announcement'){
 					$currentpostype = 'Announcments';
 			echo '<div class="small-12 medium-12 large-12 columns">';
-							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button">View All '.$currentpostype .'</a>';
+							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button">View All News</a>';
 		echo '</div>';
 		}
 		echo '</div>';
