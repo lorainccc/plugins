@@ -32,7 +32,7 @@ class LCCC_Dashboard_Icons_Widget extends WP_Widget{
 					$query->the_post();
 				?>
 				<div class="column">
-					<?php 	$asoc_link = event_meta_box_get_meta('lorainccc_db_icons_box_link');
+					<?php 	$asoc_link = lorainccc_db_icons_box_get_meta('lorainccc_db_icons_box_link');
 						if($asoc_link == ''){
 						$asoc_link = 'http://www.lorainccc.edu/';
 					}

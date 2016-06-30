@@ -34,19 +34,19 @@ class LCCC_spotlight_Widget extends WP_Widget{
 				?>
 				<div class="column lccc-spotlight">
 				<div data-equalizer="<?php the_title();?>" data-equalize-on="medium" data-resize="<?php the_title();?>">
-        <div class="large-7 medium-4 columns service-box-image" data-equalizer-watch="business" style="height: 365px;"> <?php the_post_thumbnail(); ?>
+        <div class="large-7 medium-4 columns service-box-image" data-equalizer-watch="business"> <?php the_post_thumbnail(); ?>
 								</div>
-        <div class="large-5 medium-8 columns service-box-copy text-center" data-equalizer-watch="business" style="height: 365px;">
+        <div class="large-5 medium-8 columns service-box-copy text-center" data-equalizer-watch="business">
           <div class="service-box-container">
             <div class="service-box-header">
-             <?php 	$sub_title = event_meta_box_get_meta('lorainccc_spotlight_box_sub_header');
+             <?php 	$sub_title = lorainccc_spotlight_box_get_meta('lorainccc_spotlight_box_sub_header');
 													?>
 													<h2><?php echo $sub_title; ?><span><?php the_title();?></span></h2>
             </div>
             <div class="service-box-body">
               <p><?php the_content();?></p>
             </div>
-												<?php 	$asoc_link = event_meta_box_get_meta('lorainccc_spotlight_box_link');
+												<?php 	$asoc_link = lorainccc_spotlight_box_get_meta('lorainccc_spotlight_box_link');
 														if($asoc_link == ''){
 						$asoc_link = 'http://www.lorainccc.edu/';
 					}

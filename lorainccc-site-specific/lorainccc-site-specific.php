@@ -86,15 +86,15 @@ function lorainccc_site_specific_scripts() {
 	
 	wp_enqueue_script('jquery-ui-core');
 	
-	wp_enqueue_script( 'jquery-ui-timepicker-addon-js', plugin_dir_url( __FILE__ ) . '/js/jquery-ui-timepicker-addon.js', array( 'jquery','jquery-ui-core','jquery-ui-datepicker' ), '1', true );
+	wp_enqueue_script( 'jquery-ui-timepicker-addon-js', plugin_dir_url( __FILE__ ) . 'js/jquery-ui-timepicker-addon.js', array( 'jquery','jquery-ui-core','jquery-ui-datepicker' ), '1', true );
 	
 wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 
-	wp_enqueue_style('jquery-ui-timepicker-addon-style', plugin_dir_url( __FILE__ ) . '/css/jquery-ui-timepicker-addon.css');
+	wp_enqueue_style('jquery-ui-timepicker-addon-style', plugin_dir_url( __FILE__ ) . 'css/jquery-ui-timepicker-addon.css');
 	
-	wp_enqueue_style('my_lccc_info_feed_style', plugin_dir_url( __FILE__ ) . '/css/lorainccc_plugin.css');
+	wp_enqueue_style('lccc_site_specific_style', plugin_dir_url( __FILE__ ) . 'css/lorainccc_plugin.css');
 	
-		wp_enqueue_style('my_lccc_font', plugin_dir_url( __FILE__ ) . '/fonts/styles.css');
+		wp_enqueue_style('my_lccc_font', plugin_dir_url( __FILE__ ) . 'fonts/styles.css');
 	
 }
 add_action ('init','lorainccc_site_specific_scripts');

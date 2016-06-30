@@ -31,7 +31,7 @@ class LCCC_highlight_Widget extends WP_Widget{
 	<?php
 			while ( $query->have_posts() ) {
 					$query->the_post();
-					$asoc_link = event_meta_box_get_meta('lorainccc_lccc_highlight_box_link');
+					$asoc_link = lorainccc_high_light_box_get_meta('lorainccc_lccc_highlight_box_link');
 					if($asoc_link == ''){
 						$asoc_link = 'http://www.lorainccc.edu/';
 					}
@@ -48,7 +48,7 @@ class LCCC_highlight_Widget extends WP_Widget{
 												<?php
 										}
 									?>
-							 <?php 	$bgcolor = event_meta_box_get_meta('lorainccc_lccc_highlight_box_bg_color');
+							 <?php 	$bgcolor = lorainccc_high_light_box_get_meta('lorainccc_lccc_highlight_box_bg_color');
 								if ($bgcolor == ''){
 											$bgcolor= '#000000';
 								}
