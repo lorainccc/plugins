@@ -14,6 +14,7 @@
  function lccc_breadcrumb(){
   $crumb_seperator = ' > ';
   $base_url = get_option( 'lccc_base_path', '' );
+  if ($base_url == true) {
   $base_url_pieces = explode("/", $base_url);
 
   $breadcrumb = '<a href="/" alt="LCCC Home" class="breadcrumb_crumb">Home</a>'. $crumb_seperator;
@@ -27,5 +28,9 @@
   }
 
   return $breadcrumb;
+  }
+  else {
+   return;
+  }
  }
 ?>
