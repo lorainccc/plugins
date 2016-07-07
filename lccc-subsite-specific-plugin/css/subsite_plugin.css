@@ -1,0 +1,82 @@
+.row .column.lccc-badge {
+    padding-top: 0.55rem;
+    padding-bottom: .55rem;
+    font-size: .75rem;
+    color: #fefefe;
+    margin: 1rem 0 0 0;
+}
+.Green{
+	    background: #6db400;
+}
+.Purple{
+	    background: #67296e;
+}
+.Teal{
+	    background: #068795;
+}
+.Orange{
+	background: #e36000;
+}
+.Dark_Blue{
+	    background: #0055a5;
+}
+.columns .icon{height: 77px;width: 23.5%;}
+.columns .badge-text{padding-right: 0;}
+.columns .badge-text p{font-size: .75rem;}
+.badge-text h3{text-align: center;}
+.trophy{
+		background: url(../images/icons/trophy.png);
+  background-image: url(../images/icons/trophy.svg), none;
+}
+.beautiful-campus{
+		background: url(../images/icons/beautiful-campus.png);
+  background-image: url(../images/icons/beautiful-campus.svg), none;	
+}
+.campus-map{
+		background: url(../images/icons/campus-map.png);
+  background-image: url(../images/icons/campus-map.svg), none;	
+}
+.catalog{
+		background: url(../images/icons/catalog.png);
+  background-image: url(../images/icons/catalog.svg), none;	
+}
+.collegian{
+		background: url(../images/icons/collegian.png);
+  background-image: url(../images/icons/collegian.svg), none;	
+}
+.lccc-block{
+		background: url(../images/icons/lccc-block.png);
+  background-image: url(../images/icons/lccc-block.svg), none;	
+}
+.magnifying-glass{
+		background: url(../images/icons/magnifying-glass.png);
+  background-image: url(../images/icons/magnifying-glass.svg), none;	
+}
+.parking{
+		background: url(../images/icons/parking.png);
+  background-image: url(../images/icons/parking.svg), none;	
+}
+.radio{
+		background: url(../images/icons/radio.png);
+  background-image: url(../images/icons/radio.svg), none;	
+}
+.sustainability{
+		background: url(../images/icons/sustainability.png);
+  background-image: url(../images/icons/sustainability.svg), none;	
+}
+.thumbs-up{
+		background: url(../images/icons/thumbs-up.png);
+  background-image: url(../images/icons/thumbs-up.svg), none;	
+}
+.transfer-students{
+		background: url(../images/icons/transfer-students.png);
+  background-image: url(../images/icons/transfer-students.svg), none;	
+}
+.undecided-student{
+		background: url(../images/icons/undecided-student.png);
+  background-image: url(../images/icons/undecided-student.svg), none;	
+}
+.video{
+		background: url(../images/icons/video.png);
+  background-image: url(../images/icons/video.svg), none;	
+}
