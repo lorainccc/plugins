@@ -40,6 +40,7 @@ function event_meta_box_html( $post) {
 jQuery(document).ready(function(){
 jQuery('#event_start_date').datepicker({
 	dateFormat: "mm/dd/yy"
+<<<<<<< HEAD
 });
 jQuery('#event_start_time').timepicker({
 	timeFormat: "hh:mm tt"
@@ -47,6 +48,15 @@ jQuery('#event_start_time').timepicker({
 jQuery('#event_end_date').datepicker({
 	dateFormat: "mm/dd/yy"
 });
+=======
+});
+jQuery('#event_start_time').timepicker({
+	timeFormat: "hh:mm tt"
+});
+jQuery('#event_end_date').datepicker({
+	dateFormat: "mm/dd/yy"
+});
+>>>>>>> master
 jQuery('#event_end_time').timepicker({
 	timeFormat: "hh:mm tt"
 });	
