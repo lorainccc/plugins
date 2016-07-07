@@ -1,0 +1,22 @@
+div.column a.yellow-icon img{
+	width: 70%;
+}
+div.column .icon-label{text-align: center;
+    margin-top: 15px;font-weight: 500;
+/*    color: #fefefe;*/
+    font-size: 1.125rem;
+    margin-top: 1rem;}
+.dash-icons-grid{margin: 0 15px;}
+section.cta-icons div.row .column{
+	padding: 15px 0;
+}
+.icon-label a{color: #fff;}
+.icon-label a:hover{color: #FFC600;}
+.spotlight-grid{ padding-top: 3rem;}
+.service-box-copy .button{
+	background: #0C3B78;
+}
+.service-box-copy .button:hover,.service-box-copy .button:focus {
+    background-color: #0a3266;
+    color: #fff;
+}

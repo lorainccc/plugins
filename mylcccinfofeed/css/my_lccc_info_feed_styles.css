@@ -12,7 +12,12 @@
 .business{background-color: #999999;}
 .lccc-news{background-color: #620808;}
 .lccc-student-news{background-color: #F78536;}
+<<<<<<< HEAD
+div.eventhumbnail{padding-top: 12px;padding-left: 0;padding-right: 0.5rem;}
+.lccc_event_header .event-header-container{text-align: center;}
+=======
 
+>>>>>>> master
 .headerlogo i{color: #ffffff;
     font-size: 3.5rem;}
 .metabox-field-title{margin-bottom: 0;}
@@ -22,17 +27,37 @@
 .lccc-font-lccc-reverse:before {
     font-size: 4.0rem;
 }
+p.month{
+	    color: #0c3b78;
+    display: block;
+    line-height: 100%;
+    text-transform: uppercase;
+    font-weight: 700;
+	    font-size: .6rem;
+}
+.columns .lccc_event .headerlogo{text-align: right;    box-shadow: none;margin-top: 0;}
+.columns .event-header-text-container{padding-left: 0;}
+h2.headertext{margin: 0;}
+.lccc-font-lccc-reverse{color: #fff;}
 .lccc_event .headerlogo{padding-right: 0;}
 .lccc_event_header{max-height: 65px;margin-bottom: 1rem;}
 .calender{background-image: url(../images/calendar.png);background-repeat: no-repeat;min-height: 80px;}
 .widget p.month{margin-bottom: 0;margin-top: 12px;margin-left: 4px;width: 100%; font-weight: bold;color: #003B76;line-height: 1.7;font-size: 0.97rem;}
 .widget p.day{margin-bottom: 0;    margin-top: -10px;
     margin-left: 9px; font-weight: bold;color: #003B76;}
-.widget h3.eventtitle{font-size: 1rem;line-height: 1.3125;margin-bottom: 0.3125em;color: #003B76;    font-size: 1.22rem;
+.widget h3.eventtitle{line-height: 1.3125;    
+				font-size: .75rem;
+    font-weight: 800;
+    color: #0055a5;
+    margin-bottom: .25rem;
+    text-transform: uppercase;
 }
+.column .lccc_event, .columns .lccc_event{box-shadow: inset 0 0 10px #DCDCDC;padding: 0;    margin-top: 2.3rem;}
 a.button, a.button, a.button.expand, a.button.expand{background-color: #003B76;}
-.eventcontainer{border-bottom: 1px inset #AAAAAA; margin-bottom: 10px;}
+.eventcontainer{border-bottom: 5px inset #dcdcdc; margin-bottom: 25px;padding-bottom: 20px;}
+.eventcontainer:last-child {border-top: none;}
 .widget h2.announcementheader{font-size: 2.2rem;color: #003B76;}
+.view-all-link{text-align: center;}
 @media only screen and (max-width: 40em) { 
 .lccc_event .headerlogo {
     padding-right: 0;
