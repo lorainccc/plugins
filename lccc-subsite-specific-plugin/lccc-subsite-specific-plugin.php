@@ -97,5 +97,5 @@ run_lccc_subsite_specific_plugin();
 require_once( plugin_dir_path( __FILE__ ).'php/badge-metabox.php');
 require_once( plugin_dir_path( __FILE__ ).'php/badge-widget.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/badge-post-type.php' );
-
-
+require_once( plugin_dir_path( __FILE__ ).'php/widget-gateway-menu.php' );
+require_once( plugin_dir_path( __FILE__ ).'php/widget-gateway-cpt.php' );

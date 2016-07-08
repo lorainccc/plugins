@@ -95,15 +95,21 @@ class Badge_Widget extends WP_Widget {
 					if ( $newbadges->have_posts() ) :
 							while ( $newbadges->have_posts() ) : $newbadges->the_post();
 					$bgcolor = badge_metabox_get_meta('badge_metabox_color_scheme_select');
-					$icon = badge_metabox_get_meta('badge_metabox_icon_selector');		?>
+					$icon = badge_metabox_get_meta('badge_metabox_icon_selector');
+					$redirectlink= badge_metabox_get_meta('badge_metabox_redirect_link');
+				?>
+						<a href="<?php echo $redirectlink; ?>">
 								<div class="column lccc-badge  <?php echo $bgcolor; ?>">
-								  <div class="small-3 columns medium-3 large-3 columns icon <?php echo $icon; ?>">
+								  		<div class="small-3 columns medium-3 large-3 columns icon-container">
+												<div class="small-3 columns medium-3 large-3 columns icon <?php echo $icon; ?>">
 									
+									 		</div>
 									 </div>
 										<div class="small-9 columns medium-9 large-9 columns icon">
 															<?php echo 'hello'; ?>
 									 </div>
 								</div>
+							</a>
 							<?php
 							endwhile;
 					endif;																																					
@@ -125,16 +131,21 @@ class Badge_Widget extends WP_Widget {
 							while ( $newbadges->have_posts() ) : $newbadges->the_post();
 				$bgcolor = badge_metabox_get_meta('badge_metabox_color_scheme_select');
 			$icon = badge_metabox_get_meta('badge_metabox_icon_selector');
+				$redirectlink= badge_metabox_get_meta('badge_metabox_redirect_link');
 				?>
+				<a href="<?php echo $redirectlink; ?>">
 								<div class="column lccc-badge <?php echo $bgcolor; ?>">
-										<div class="small-3 columns medium-3 large-3 columns icon <?php echo $icon; ?>">
+										<div class="small-3 columns medium-3 large-3 columns icon-container">
+												<div class="small-3 columns medium-3 large-3 columns icon <?php echo $icon; ?>">
 									
+									 		</div>
 									 </div>
 										<div class="small-9 columns medium-9 large-9 columns badge-text">
 															<?php the_title('<h3>','</h3>'); ?>
 															<?php the_content('<p>','</p>'); ?>
 									 </div>
 								</div>
+					</a>
 							<?php
 							endwhile;
 					endif;																																					

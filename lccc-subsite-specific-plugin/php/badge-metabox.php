@@ -80,8 +80,10 @@ function badge_metabox_save( $post_id ) {
 
 	if ( isset( $_POST['badge_metabox_color_scheme_select'] ) )
 		update_post_meta( $post_id, 'badge_metabox_color_scheme_select', esc_attr( $_POST['badge_metabox_color_scheme_select'] ) );
+	
 	if ( isset( $_POST['badge_metabox_icon_selector'] ) )
 		update_post_meta( $post_id, 'badge_metabox_icon_selector', esc_attr( $_POST['badge_metabox_icon_selector'] ) );
+	
 	if ( isset( $_POST['badge_metabox_redirect_link'] ) )
 		update_post_meta( $post_id, 'badge_metabox_redirect_link', esc_attr( $_POST['badge_metabox_redirect_link'] ) );
 }
