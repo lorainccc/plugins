@@ -13,9 +13,16 @@
 .lccc-news{background-color: #620808;}
 .lccc-student-news{background-color: #F78536;}
 div.eventhumbnail{padding-top: 12px;padding-left: 0;padding-right: 0.5rem;}
+.columns.stocker_event_footer{text-align: center;color: #fff;padding: 10px 0;}
+.columns.event_header{ padding: 10px 0;}
+.columns .stocker_event_image{padding: 0;}
+h2.stocker-event-title{color: #fff;text-align: center;}
 .lccc_event_header .event-header-container{text-align: center;}
 .lccc_announcement_header-sub-site{text-align: center;background: #0c3b78;color: #fefefe;margin-top: 0;padding: 0;}
+h3.stocker-event-date{text-align: center; color: #fff;    font-size: 1.1375rem;}
 .columns .lccc_announcement-sub-site .headerlogo-sub-site{padding: 0;}
+.columns.stocker-view-all-link{padding-top: 30px; text-align: center; }
+.LCCC_Stocker_Event_Widget{padding-top: 20px;}
 .columns .sub-announcement a{    line-height: 1.3125;
     font-size: .75rem;
     font-weight: 800;
@@ -57,6 +64,12 @@ p.month{
     font-weight: 700;
 	    font-size: .6rem;
 }
+.columns.stocker-eventcontainer{padding: 0;}
+h5.stocker-footer-header:before{
+	content: url(../images/theater-tickets.png);
+	margin: 16px 8px 0 0;
+    vertical-align: -40%;
+}
 .columns .lccc_event .headerlogo{text-align: right;    box-shadow: none;margin-top: 0;}
 .columns .event-header-text-container{padding-left: 0;}
 h2.headertext{margin: 0;}
@@ -64,6 +77,7 @@ h2.headertext{margin: 0;}
 .lccc_event .headerlogo{padding-right: 0;}
 .lccc_event_header{max-height: 65px;margin-bottom: 1rem;}
 .calender{background-image: url(../images/calendar.png);background-repeat: no-repeat;min-height: 80px;}
+
 .widget p.month{margin-bottom: 0;margin-top: 12px;margin-left: 4px;width: 100%; font-weight: bold;color: #003B76;line-height: 1.7;font-size: 0.97rem;}
 .widget p.day{margin-bottom: 0;    margin-top: -10px;
     margin-left: 9px; font-weight: bold;color: #003B76;}

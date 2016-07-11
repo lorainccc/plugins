@@ -1,16 +1,16 @@
 <?php
 /** Widget Code */
-class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
+class LCCC_Whats_Going_On_Stocker_Event_Widget extends WP_Widget {
 
 	/**
 	 * Sets up the widgets name etc
 	 */
 	public function __construct() {
 		$widget_ops = array( 
-				'classname' => 'LCCC_Whats_Going_On_Event_Widget',
-			'description' => 'LCCC Whats Going On Event Widget for displaying LCCC Events on LCCC sites',
+				'classname' => 'LCCC_Stocker_Event_Widget',
+			'description' => 'LCCC Stocker Event Widget fpr displaying LCCC Stocker Events on LCCC Stocker web site',
 		);
-		parent::__construct( 'LCCC_Whats_Going_On_Event_Widgett', 'LCCC Whats Going On Event Widget', $widget_ops );
+		parent::__construct( 'LCCC_Stocker_Event_Widget', 'LCCC Stocker Event Widget', $widget_ops );
 	}
 
 	/**
@@ -28,19 +28,6 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 			$widgetcategory = $instance['category'];
    echo $before_widget;
    // Display the widget
-		 echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'">';
-		 if ($whattodisplay == 'lccc_event'){
-   echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
-							echo '<div class="small-5 medium-5 large-5 columns '.$whattodisplay.' headerlogo">';
-											echo '<i class="lccc-font-lccc-reverse">'.'</i>';
-							echo '</div>';
-							echo '<div class="small-7 medium-7 large-7 columns event-header-text-container">';
-										echo '<h2 class="headertext">'.'Events'.'</h2>';
-							echo '</div>';
-			echo '</div>';
-			}
-	  
- if ($whattodisplay == 'lccc_event'){
 				$today = getdate();
 				$currentDay = $today['mday'];
 				$month = $today['mon'];
@@ -90,6 +77,32 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
          ), 			 
 							),
 						'orderby' => array(
+                  'start_date' => 'DESC',
+																		'time_order' => 'ASC',
+          ),
+					);
+		?>
+<div class="row small-up-1 medium-up-2 large-up-4">
+  <?php 
+		$eventargs=array(
+					'post_type' => 'lccc_event',
+					'post_status' => 'publish',
+  			'posts_per_page' => $numberofposts,
+					'category_name' => $widgetcategory,
+					'meta_query' => array(
+													'relation' => 'AND', 
+													'start_date' => array(
+                  'key' => 'event_start_date',
+                  'compare' => 'EXISTS',
+																		'type' => 'DATE',
+              ),									
+						 
+									'time_order' => array(
+              'key' => 'event_start_time',
+              'compare' => 'EXISTS',
+         ), 			 
+							),
+						'orderby' => array(
                   'start_date' => 'ASC',
 																		'time_order' => 'ASC',
           ),
@@ -97,12 +110,15 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 					$newevents = new WP_Query($eventargs);
 					if ( $newevents->have_posts() ) :
 							while ( $newevents->have_posts() ) : $newevents->the_post();
-		$starteventdate = 
+				?>
+	<div class="column">
+	<?php
+										$starteventdate = 
 			event_meta_box_get_meta('event_start_date');
 		$starteventtime = event_meta_box_get_meta('event_start_time');  
 		$endeventdate = event_meta_box_get_meta('event_end_date');
 		$endtime = event_meta_box_get_meta('event_end_time');
-		
+		$bgcolor = event_meta_box_get_meta('event_meta_box_stoccker_bg_color');
 
 										$starttimevar=strtotime($starteventtime);
 										$starttime=	date("h:i a",$starttimevar);
@@ -111,6 +127,7 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 		
           $startdate=strtotime($starteventdate);
 										$eventstartdate=date("Y-m-d",$startdate);
+										$stockereventstartdate=date("M d, Y",$startdate);
 										$eventstartmonth=date("M",$startdate);
 										$eventstartday =date("j",$startdate);								
 										
@@ -143,54 +160,47 @@ class LCCC_Whats_Going_On_Event_Widget extends WP_Widget {
 										$date=strtotime($today);
 										$today_event_month=date("M",$date);
           $today_event_day=date("j",$date);
-          //echo 'Today:'.$today.'<br />';
-										//echo 'Event Start Date and Time: '. $starteventdate.'<br />';
-										//echo 'Event Start:'.$eventstartdate.'<br />';
-										//echo 'Event Start Time:'.$starttime.'<br />';
-										//echo 'Event Start Month:'.$eventstartmonth.'<br />';
-										//echo 'Event Start Day:'.$eventstartday.'<br />';
-										//echo 'Event End Date:'.$endeventdate.'<br />';
+
 									
 				if( $eventstartdate <= $today && $endeventdate >= $today){
-							echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
-							echo '<div class="small-12 medium-12 large-3 columns calender">';
-							echo '<p class="month">'.$today_event_month.'</p>';
-							echo '<p class="day">'.$today_event_day.'</p>';
-							echo '</div>';
-							echo '<div class="small-12 medium-12 large-9 columns">';
-															?><a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
-								<?php
-							echo '<p style="font-weight: bold;margin-bottom: 0;">Start Time: '.$starttime.'</p>';	
-							echo '<p>Duration: '.$duration.'</p>';
-											the_excerpt('<p>','</p>');
-							echo '</div>';
-
+							echo '<div class="small-12 medium-12 large-12 columns stocker-eventcontainer">';
+											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns stocker_event_header">';
+													the_title('<h2 class="stocker-event-title">','</h2>');
+													echo '<h3 class="stocker-event-date">'.$stockereventstartdate.'</h3>';
+											echo '</div>';	
+											echo '<div class="small-12 medium-12 large-12 columns stocker_event_image">';
+														the_post_thumbnail();
+											echo '</div>';						
+											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns stocker_event_footer">';
+											echo '<h5>Buy Tickets</h5>';
+											echo '</div>';	
 							echo '</div>';
 
 					}
 					if( $eventstartdate >= $today){
-									echo '<div class="small-12 medium-12 large-12 columns eventcontainer">';
-							echo '<div class="small-12 medium-12 large-3 columns calender">';
-							echo '<p class="month">'.$eventstartmonth.'</p>';
-							echo '<p class="day">'.$eventstartday.'</p>';
+									echo '<div class="small-12 medium-12 large-12 columns stocker-eventcontainer">';
+											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns event_header">';
+												the_title('<h2 class="stocker-event-title">','</h2>');
+													echo '<h3 class="stocker-event-date">'.$stockereventstartdate.'</h3>';
+											echo '</div>';
+											echo '<div class="small-12 medium-12 large-12 columns stocker_event_image">';
+														the_post_thumbnail();
+											echo '</div>';
+											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns stocker_event_footer">';
+											echo '<h5 class="stocker-footer-header">Buy Tickets</h5>';
+											echo '</div>';							
 							echo '</div>';
-							echo '<div class="small-12 medium-12 large-9 columns">';
-													?><a href="<?php the_permalink();?>"><?php the_title('<h3 class="eventtitle">','</h3>');?></a>
-								<?php
-						echo '<p style="font-weight: bold;margin-bottom: 0;">Start Time: '.$starttime.'</p>';		
-					echo '<p>Duration: '.$duration.'</p>';
-											the_excerpt('<p>','</p>');
-				echo '<div class="event-divider"></div>';				
-							echo '</div>';
-		
-							echo '</div>';
-
-						
 					}
+		?>
+	</div>
+		<?php
 							endwhile;
 					endif;
-		}
-		echo '<div class="small-12 medium-12 large-12 columns view-all-link">';
+		?>
+</div>
+<?php
+
+		echo '<div class="small-12 medium-12 large-12 columns stocker-view-all-link">';
 							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All Events </a>';
 		echo '</div>';	
 		echo '</div>';
@@ -265,6 +275,6 @@ echo '<option value="' . $option . '" id="' . $option . '"', $numberofposts == $
 	}
 }
 add_action( 'widgets_init', function(){
-	register_widget( 'LCCC_Whats_Going_On_Event_Widget' );
+	register_widget( 'LCCC_Whats_Going_On_Stocker_Event_Widget' );
 });
 ?>

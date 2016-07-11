@@ -165,7 +165,7 @@ function lcccLocation_post_type() {
 		'menu_icon'   => 'dashicons-location-alt',
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
-		'capability_type'       => 'page',
+		'capability_type'       => 'post',
 	);
 	register_post_type( 'lccc_location', $args );
 
