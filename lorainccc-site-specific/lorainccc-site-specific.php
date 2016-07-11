@@ -80,22 +80,22 @@ require_once( plugin_dir_path( __FILE__ ).'php/lccc_cpt.php' );
 * The Enque Function for the Jquery UI function of the metabox code below
 */
 function lorainccc_site_specific_scripts() {
-	wp_enqueue_style( 'lato-google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic', false ); 	
-	
+	wp_enqueue_style( 'lato-google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic', false );
+
 	wp_enqueue_script('jquery-ui-datepicker');
-	
+
 	wp_enqueue_script('jquery-ui-core');
-	
+
 	wp_enqueue_script( 'jquery-ui-timepicker-addon-js', plugin_dir_url( __FILE__ ) . 'js/jquery-ui-timepicker-addon.js', array( 'jquery','jquery-ui-core','jquery-ui-datepicker' ), '1', true );
-	
+
 wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 
 	wp_enqueue_style('jquery-ui-timepicker-addon-style', plugin_dir_url( __FILE__ ) . 'css/jquery-ui-timepicker-addon.css');
-	
+
 	wp_enqueue_style('lccc_site_specific_style', plugin_dir_url( __FILE__ ) . 'css/lorainccc_plugin.css');
-	
+
 		wp_enqueue_style('my_lccc_font', plugin_dir_url( __FILE__ ) . 'fonts/styles.css');
-	
+
 }
 add_action ('init','lorainccc_site_specific_scripts');
 
@@ -104,4 +104,8 @@ require_once( plugin_dir_path( __FILE__ ).'php/displayfunctions.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/dashboard_icons_widget.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/spotlight_widget.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/highlight_widget.php' );
+//Breadcrumb code
+require_once( plugin_dir_path( __FILE__ ).'php/breadcrumb_site_options.php' );
+require_once( plugin_dir_path( __FILE__ ).'php/display_breadcrumbs.php' );
+
 
