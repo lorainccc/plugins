@@ -127,7 +127,10 @@ jQuery('#event_end_time').timepicker({
 		<label for="event_end_time"><?php _e( 'Event End time:', 'event_meta_box' ); ?></label><br>
 		<input type="text" name="event_end_time" id="event_end_time" value="<?php echo event_meta_box_get_meta( 'event_end_time' ); ?>">
 	</p>	
-
+	<p>
+		<label for="event_meta_box_stoccker_bg_color"><?php _e( 'Stocker Backgound Color', 'event_meta_box' ); ?></label><br>
+		<input class="widefat" type="text" name="event_meta_box_stoccker_bg_color" id="event_meta_box_stoccker_bg_color" value="<?php echo event_meta_box_get_meta( 'event_meta_box_stoccker_bg_color' ); ?>">
+	</p>	
 <h4 class="metabox-field-title">Who should your audience contact for more information?</h4>
 <p>
 			<label for="lccc_event_contact_name"><?php _e( 'Name:', 'event_meta_box' ); ?></label><br>
@@ -151,6 +154,9 @@ function event_meta_box_save( $post_id ) {
 
 	if ( isset( $_POST['event_meta_box_name'] ) )
 		update_post_meta( $post_id, 'event_meta_box_name', esc_attr( $_POST['event_meta_box_name'] ) );
+	if ( isset( $_POST['event_meta_box_name'] ) )
+		update_post_meta( $post_id, 'event_meta_box_stoccker_bg_color', esc_attr( $_POST['event_meta_box_stoccker_bg_color'] ) );
+	
 	if ( isset( $_POST['event_meta_box_phone'] ) )
 		update_post_meta( $post_id, 'event_meta_box_phone', esc_attr( $_POST['event_meta_box_phone'] ) );
 	if ( isset( $_POST['event_meta_box_e_mail'] ) )
