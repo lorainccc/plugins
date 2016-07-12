@@ -66,6 +66,8 @@ function badge_metabox_html( $post) {
 			<option <?php echo (badge_metabox_get_meta( 'badge_metabox_icon_selector' ) === 'thumbs-up' ) ? 'selected' : '' ?>>thumbs-up</option>
 			<option <?php echo (badge_metabox_get_meta( 'badge_metabox_icon_selector' ) === 'transfer-students' ) ? 'selected' : '' ?>>transfer-students</option>
 			<option <?php echo (badge_metabox_get_meta( 'badge_metabox_icon_selector' ) === 'undecided-student' ) ? 'selected' : '' ?>>undecided-student</option>
+			<option <?php echo (badge_metabox_get_meta( 'badge_metabox_icon_selector' ) === 'stage' ) ? 'selected' : '' ?>>stage</option>
+			<option <?php echo (badge_metabox_get_meta( 'badge_metabox_icon_selector' ) === 'theater-tickets' ) ? 'selected' : '' ?>>theater-tickets</option>
 		</select>
 	</p>	<p>
 		<label for="badge_metabox_redirect_link"><?php _e( 'Redirect Link', 'badge_metabox' ); ?></label><br>

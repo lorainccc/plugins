@@ -65,10 +65,12 @@ p.month{
 	    font-size: .6rem;
 }
 .columns.stocker-eventcontainer{padding: 0;}
+a h5.stocker-footer-header {color: #fff;}
 h5.stocker-footer-header:before{
 	content: url(../images/theater-tickets.png);
 	margin: 16px 8px 0 0;
     vertical-align: -40%;
+	color: #fff;
 }
 .columns .lccc_event .headerlogo{text-align: right;    box-shadow: none;margin-top: 0;}
 .columns .event-header-text-container{padding-left: 0;}

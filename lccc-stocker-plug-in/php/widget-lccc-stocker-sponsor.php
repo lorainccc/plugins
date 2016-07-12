@@ -75,36 +75,22 @@ class LCCC_Stocker_Sponsor_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		
-		// Check if there is a cached output
-		$cache = wp_cache_get( $this->get_widget_slug(), 'widget' );
-
-		if ( !is_array( $cache ) )
-			$cache = array();
-
-		if ( ! isset ( $args['widget_id'] ) )
-			$args['widget_id'] = $this->id;
-
-		if ( isset ( $cache[ $args['widget_id'] ] ) )
-			return print $cache[ $args['widget_id'] ];
-		
-		// go on with your widget logic, put everything into a string and …
-
-
-		extract( $args, EXTR_SKIP );
-
-		$widget_string = $before_widget;
-
-		$widget_string .= ob_get_clean();
-		$widget_string .= $after_widget;
-
-
-		$cache[ $args['widget_id'] ] = $widget_string;
-
-		wp_cache_set( $this->get_widget_slug(), $cache, 'widget' );
-
-		print $widget_string;
-
+			$sponsorargs=array(
+					'post_type' => 'stocker-sponsor',
+					'post_status' => 'publish',
+					);
+					$newsponsors = new WP_Query($sponsorargs);
+					if ( $newsponsors->have_posts() ) :
+					echo '<div class="row small-up-1 medium-up-2 large-up-4">';
+							while ( $newsponsors->have_posts() ) : $newsponsors->the_post();
+		$assoclink = stocker_sponsor_metabox_get_meta('stocker_sponsor_metabox_associated_link');
+										echo '<div class="column lccc-sponsor">';
+														echo '<a href="'.$assoclink.'">'; 			the_post_thumbnail();
+														echo '</a>';
+										echo '</div>';
+							endwhile;
+					echo '</div>';
+					endif;
 	} // end widget
 	
 	

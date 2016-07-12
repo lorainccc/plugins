@@ -5,6 +5,7 @@
     color: #fefefe;
 				margin-left: 0.9375rem;
     width: 92%;
+	    margin-bottom: 30px;
 }
 .columns .gtwymenu-content ul{
 	list-style: none;
@@ -38,7 +39,7 @@
 .Dark_Blue{
 	    background: #0055a5;
 }
-.columns .icon{height: 53px;width: 100%;}
+.columns .icon{height: 70px;width: 100%;}
 .columns .badge-text{padding-right: 0;}
 .columns .badge-text p{font-size: .75rem;}
 .badge-text h3{text-align: left;font-size: 1.2375rem;margin-bottom: .15rem;}
@@ -76,6 +77,16 @@
 		background: url(../images/icons/magnifying-glass.png);
   background-image: url(../images/icons/magnifying-glass.svg), none;	
 	background-repeat: no-repeat;
+}
+.theater-tickets{
+	background: url(../images/icons/theater-tickets.png);
+  background-image: url(../images/icons/theater-tickets.svg), none;	
+		background-repeat: no-repeat;
+}
+.stage{
+	background: url(../images/icons/stage.png);
+  background-image: url(../images/icons/stage.svg), none;	
+		background-repeat: no-repeat;
 }
 .parking{
 		background: url(../images/icons/parking.png);

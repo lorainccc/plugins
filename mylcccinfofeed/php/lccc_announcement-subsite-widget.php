@@ -111,6 +111,7 @@ class LCCC_Announcement_Sub_Site_Widget extends WP_Widget {
 							echo '<a href="'.get_post_type_archive_link( $whattodisplay ).'" class="button expand">View All Announcements </a>';
 		echo '</div>';	
 				echo '</div>';
+		echo '</div>';
 	}
 	public function flush_widget_cache() 
 	{
