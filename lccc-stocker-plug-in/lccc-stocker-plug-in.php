@@ -46,11 +46,6 @@ function lorainccc_stocker_plugin_scripts() {
 }
 add_action ('init','lorainccc_stocker_plugin_scripts');
 
-
-
-
-
-
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-lccc-stocker-plug-in-deactivator.php
@@ -85,8 +80,6 @@ function run_lccc_stocker_plug_in() {
 
 }
 run_lccc_stocker_plug_in();
-
-require_once( plugin_dir_path( __FILE__ ).'php/lccc_stocker_highlight_cpt.php');
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_stocker_sponsor_cpt.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/widget-lccc-stocker-sponsor.php' );
-require_once( plugin_dir_path( __FILE__ ).'php/widget-lcc-stocker-highlight.php' );
+require_once( plugin_dir_path( __FILE__ ).'php/lccc-sponsor-metabox.php' );

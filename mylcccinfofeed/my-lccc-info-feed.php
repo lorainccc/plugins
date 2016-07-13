@@ -128,17 +128,6 @@ require_once( plugin_dir_path( __FILE__ ).'php/lccc_announcement-subsite-widget.
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_stocker_eventwidget.php' );
 
 
-// CHANGE EXCERPT LENGTH FOR DIFFERENT POST TYPES
- 
-function custom_excerpt_length($length) {
-    global $post;
-    if ($post->post_type == 'lccc_event')
-    return 30;
-    else if ($post->post_type == 'lccc_announcement')
-    return 70;
-    else
-    return 40;
-}
-add_filter('excerpt_length', 'custom_excerpt_length');
+
 
 ?>

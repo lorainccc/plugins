@@ -165,14 +165,16 @@ class LCCC_Whats_Going_On_Stocker_Event_Widget extends WP_Widget {
 				if( $eventstartdate <= $today && $endeventdate >= $today){
 							echo '<div class="small-12 medium-12 large-12 columns stocker-eventcontainer">';
 											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns stocker_event_header">';
+											echo '<a href="'.get_the_permalink().'">';
 													the_title('<h2 class="stocker-event-title">','</h2>');
-													echo '<h3 class="stocker-event-date">'.$stockereventstartdate.'</h3>';
+										echo '</a>';			
+											echo '<h3 class="stocker-event-date">'.$stockereventstartdate.'</h3>';
 											echo '</div>';	
 											echo '<div class="small-12 medium-12 large-12 columns stocker_event_image">';
 														the_post_thumbnail();
 											echo '</div>';						
 											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns stocker_event_footer">';
-											echo '<h5>Buy Tickets</h5>';
+											echo '<a href="https://tickets.lorainccc.edu"><h5 class="stocker-footer-header">Buy Tickets</h5></a>';
 											echo '</div>';	
 							echo '</div>';
 
@@ -180,14 +182,18 @@ class LCCC_Whats_Going_On_Stocker_Event_Widget extends WP_Widget {
 					if( $eventstartdate >= $today){
 									echo '<div class="small-12 medium-12 large-12 columns stocker-eventcontainer">';
 											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns event_header">';
-												the_title('<h2 class="stocker-event-title">','</h2>');
+												echo '<a href="'.get_the_permalink().'">';
+													the_title('<h2 class="stocker-event-title">','</h2>');
+										echo '</a>';
 													echo '<h3 class="stocker-event-date">'.$stockereventstartdate.'</h3>';
 											echo '</div>';
 											echo '<div class="small-12 medium-12 large-12 columns stocker_event_image">';
 														the_post_thumbnail();
 											echo '</div>';
 											echo '<div style="background:'.$bgcolor.';" class="small-12 medium-12 large-12 columns stocker_event_footer">';
+											echo '<a href="https://tickets.lorainccc.edu">';
 											echo '<h5 class="stocker-footer-header">Buy Tickets</h5>';
+											echo '</a>';
 											echo '</div>';							
 							echo '</div>';
 					}
