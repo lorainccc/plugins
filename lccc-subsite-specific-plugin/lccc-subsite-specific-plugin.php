@@ -58,21 +58,21 @@ register_deactivation_hook( __FILE__, 'deactivate_lccc_subsite_specific_plugin' 
 require plugin_dir_path( __FILE__ ) . 'includes/class-lccc-subsite-specific-plugin.php';
 
 function lorainccc_subsite_specific_scripts() {
-	wp_enqueue_style( 'lato-google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic', false ); 	
-	
+	wp_enqueue_style( 'lato-google-fonts', 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic', false );
+
 	wp_enqueue_script('jquery-ui-datepicker');
-	
+
 	wp_enqueue_script('jquery-ui-core');
-	
+
 	wp_enqueue_script( 'jquery-ui-timepicker-addon-js', plugin_dir_url( __FILE__ ) . 'js/jquery-ui-timepicker-addon.js', array( 'jquery','jquery-ui-core','jquery-ui-datepicker' ), '1', true );
-	
+
 wp_enqueue_style( 'jquery-ui-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/smoothness/jquery-ui.css', true);
 
 	wp_enqueue_style('jquery-ui-timepicker-addon-style', plugin_dir_url( __FILE__ ) . 'css/jquery-ui-timepicker-addon.css');
-	
+
 	wp_enqueue_style('lccc_subsite_specific_style', plugin_dir_url( __FILE__ ) . 'css/subsite_plugin.css');
-	
-	
+
+
 }
 add_action ('init','lorainccc_subsite_specific_scripts');
 
@@ -102,3 +102,6 @@ require_once( plugin_dir_path( __FILE__ ).'php/widget-gateway-cpt.php' );
 
 require_once( plugin_dir_path( __FILE__ ).'php/dept-contact-cpt.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/dept-contact-metabox.php' );
+
+require_once( plugin_dir_path( __FILE__ ).'php/lccc-site-options.php' );
+require_once( plugin_dir_path( __FILE__ ).'php/breadcrumb-trail.php' );
