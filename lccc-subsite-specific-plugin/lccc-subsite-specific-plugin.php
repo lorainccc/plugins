@@ -105,3 +105,4 @@ require_once( plugin_dir_path( __FILE__ ).'php/dept-contact-metabox.php' );
 
 require_once( plugin_dir_path( __FILE__ ).'php/lccc-site-options.php' );
 require_once( plugin_dir_path( __FILE__ ).'php/breadcrumb-trail.php' );
+require_once( plugin_dir_path( __FILE__ ).'php/lccc-edit-role.php' );
