@@ -9,8 +9,8 @@
  * @link       http://www.lorainccc.edu
  * @since      1.0.0
  *
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  * @author     LCCC Web Dev Team <notice@lorainccc.edu>
  */
-class Lccc_Custom_Breadcrumbs_i18n {
+class Lccc_Program_Pathways_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Lccc_Custom_Breadcrumbs_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'lccc-custom-breadcrumbs',
+			'lccc-program-pathways',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

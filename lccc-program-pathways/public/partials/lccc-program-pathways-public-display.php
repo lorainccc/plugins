@@ -8,8 +8,8 @@
  * @link       http://www.lorainccc.edu
  * @since      1.0.0
  *
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/public/partials
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/public/partials
  */
 ?>
 

@@ -9,8 +9,8 @@
  * @link       http://www.lorainccc.edu
  * @since      1.0.0
  *
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  * @author     LCCC Web Dev Team <notice@lorainccc.edu>
  */
-class Lccc_Custom_Breadcrumbs {
+class Lccc_Program_Pathways {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Lccc_Custom_Breadcrumbs {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Lccc_Custom_Breadcrumbs_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Lccc_Program_Pathways_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -68,7 +68,7 @@ class Lccc_Custom_Breadcrumbs {
 	 */
 	public function __construct() {
 
-		$this->plugin_name = 'lccc-custom-breadcrumbs';
+		$this->plugin_name = 'lccc-program-pathways';
 		$this->version = '1.0.0';
 
 		$this->load_dependencies();
@@ -83,10 +83,10 @@ class Lccc_Custom_Breadcrumbs {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Lccc_Custom_Breadcrumbs_Loader. Orchestrates the hooks of the plugin.
-	 * - Lccc_Custom_Breadcrumbs_i18n. Defines internationalization functionality.
-	 * - Lccc_Custom_Breadcrumbs_Admin. Defines all hooks for the admin area.
-	 * - Lccc_Custom_Breadcrumbs_Public. Defines all hooks for the public side of the site.
+	 * - Lccc_Program_Pathways_Loader. Orchestrates the hooks of the plugin.
+	 * - Lccc_Program_Pathways_i18n. Defines internationalization functionality.
+	 * - Lccc_Program_Pathways_Admin. Defines all hooks for the admin area.
+	 * - Lccc_Program_Pathways_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -100,33 +100,33 @@ class Lccc_Custom_Breadcrumbs {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lccc-custom-breadcrumbs-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lccc-program-pathways-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lccc-custom-breadcrumbs-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-lccc-program-pathways-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-lccc-custom-breadcrumbs-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-lccc-program-pathways-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-lccc-custom-breadcrumbs-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-lccc-program-pathways-public.php';
 
-		$this->loader = new Lccc_Custom_Breadcrumbs_Loader();
+		$this->loader = new Lccc_Program_Pathways_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Lccc_Custom_Breadcrumbs_i18n class in order to set the domain and to register the hook
+	 * Uses the Lccc_Program_Pathways_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -134,7 +134,7 @@ class Lccc_Custom_Breadcrumbs {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Lccc_Custom_Breadcrumbs_i18n();
+		$plugin_i18n = new Lccc_Program_Pathways_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -149,7 +149,7 @@ class Lccc_Custom_Breadcrumbs {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Lccc_Custom_Breadcrumbs_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Lccc_Program_Pathways_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -165,7 +165,7 @@ class Lccc_Custom_Breadcrumbs {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Lccc_Custom_Breadcrumbs_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Lccc_Program_Pathways_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -196,7 +196,7 @@ class Lccc_Custom_Breadcrumbs {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Lccc_Custom_Breadcrumbs_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Lccc_Program_Pathways_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

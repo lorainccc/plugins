@@ -6,8 +6,8 @@
  * @link       http://www.lorainccc.edu
  * @since      1.0.0
  *
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  * @author     LCCC Web Dev Team <notice@lorainccc.edu>
  */
-class Lccc_Custom_Breadcrumbs_Activator {
+class Lccc_Program_Pathways_Activator {
 
 	/**
 	 * Short Description. (use period)

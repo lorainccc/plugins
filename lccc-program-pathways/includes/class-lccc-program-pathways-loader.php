@@ -6,8 +6,8 @@
  * @link       http://www.lorainccc.edu
  * @since      1.0.0
  *
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Lccc_Custom_Breadcrumbs
- * @subpackage Lccc_Custom_Breadcrumbs/includes
+ * @package    Lccc_Program_Pathways
+ * @subpackage Lccc_Program_Pathways/includes
  * @author     LCCC Web Dev Team <notice@lorainccc.edu>
  */
-class Lccc_Custom_Breadcrumbs_Loader {
+class Lccc_Program_Pathways_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

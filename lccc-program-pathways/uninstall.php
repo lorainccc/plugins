@@ -22,7 +22,7 @@
  * @link       http://www.lorainccc.edu
  * @since      1.0.0
  *
- * @package    Lccc_Custom_Breadcrumbs
+ * @package    Lccc_Program_Pathways
  */
 
 // If uninstall not called from WordPress, then exit.
