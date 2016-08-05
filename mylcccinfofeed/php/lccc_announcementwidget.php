@@ -45,40 +45,14 @@ class LCCC_Whats_Going_On_Announcement_Widget extends WP_Widget {
 			echo '</div>';
 			}
 	  	$today = getdate();
+
 		if ($whattodisplay == 'lccc_announcement'){
 					$announcementargs=array(
-					'post_type' => $whattodisplay,
+					'post_type' => lccc_announcement,
 					'post_status' => 'publish',
-  			'posts_per_page' => $numberofposts,
-					'category_name' => $widgetcategory,
-<<<<<<< HEAD
-
-=======
-					'meta_query' => array(
-                'relation' => 'AND',
-                array(
-																					'relation' => 'OR',
-																				'start_date_order' => array(
-                       'key' => 'event_start_date',
-                       'value' => $today,
-                       'compare' => '>=',
-                 				),
-																				'end_date_order' => array(
-                       'key' => 'event_end_date',
-                       'value' => $today,
-                       'compare' => '<=',
-                 				),
-																	),
-                 'time_order' => array(
-                    'key' => 'event_start_time',
-                    'compare' => 'EXISTS',
-                 ),    
-     ),
-					'orderby' => array(
-                  'start_date_order' => 'ASC',
-                  'time_order' => 'ASC',
-          ),
->>>>>>> master
+					'cat' => $widgetcategory,
+					'orderby' => 'date',
+					'order' => 'DESC',
 					);
 					$newevents = new WP_Query($announcementargs);
 					if ( $newevents->have_posts() ) :
@@ -140,18 +114,8 @@ echo '<option value="' . $option . '" id="' . $option . '"', $numberofposts == $
 </select>
 </p>
 		<p>
-<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category:', 'wp_widget_plugin'); ?></label>
-
-<select name="<?php echo $this->get_field_name('category'); ?>" id="<?php echo $this->get_field_id('category'); ?>"class="widefat">
-		<?php
-  // Get categories as array
-  $categories = get_categories( $args );
-  foreach ( $categories as $category ) :
-  		echo '<option value="' . $category->name . '" id="' . $category->term_id . '"', $widgetcategory == $category->name ? ' selected="selected"' : '', '>', $category->name, '</option>';
-  endforeach;
-?>
-</select>		
-		
+ <label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Select category', 'wp_widget_plugin' ); ?>:</label>
+    <?php wp_dropdown_categories( array( 'show_option_none' =>' ','name' => $this->get_field_name( 'category' ), 'selected' => $widgetcategory ) ); ?>			
 </p>
 <?php
 	}
@@ -166,9 +130,9 @@ echo '<option value="' . $option . '" id="' . $option . '"', $numberofposts == $
 		// processes widget options to be saved
 		       $instance = $old_instance;
       // Fields
-     	$instance['numberofposts'] = strip_tags($new_instance['numberofposts']);
-		 $instance['category'] = strip_tags($new_instance['category']);
-						return $instance;
+     		$instance['numberofposts'] = strip_tags($new_instance['numberofposts']);
+		 $instance['category'] = $new_instance['category'];
+		return $instance;
 	}
 }
 add_action( 'widgets_init', function(){

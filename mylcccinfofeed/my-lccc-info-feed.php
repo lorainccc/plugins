@@ -115,6 +115,26 @@ function enqueue_foundation() {
 	  }
 add_action( 'wp_enqueue_scripts', 'enqueue_foundation' );
 
+function enqueue_angular(){
+		wp_enqueue_script( 'angular-core', 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js', array( 'jquery' ), '1.0', false );
+		wp_enqueue_script( 'angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.js', array('angular-core'), '1.0', false );
+		wp_enqueue_script( 'ui-router', 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js', array( 'angular-core' ), '1.0', false );
+		wp_enqueue_script( 'ngScripts', plugin_dir_url( __FILE__ ) . '/js/angular-widget.js', array( 'ui-router' ), '1.0', false );
+		wp_localize_script( 'ngScripts', 'appInfo',
+			array(
+				
+				'api_url'			 => rest_get_url_prefix() . '/wp/v2/',
+				'template_directory' =>  plugin_dir_url( __FILE__ ) . '/',
+				'nonce'				 => wp_create_nonce( 'wp_rest' ),
+				'is_admin'			 => current_user_can('administrator')
+				
+			)
+		);
+
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_angular' );
+
+
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_pluginmetabox.php' );
 
 require_once( plugin_dir_path( __FILE__ ).'php/displayfunctions.php' );
@@ -123,20 +143,26 @@ require_once( plugin_dir_path( __FILE__ ).'php/lccc_eventwidget.php' );
 
 require_once( plugin_dir_path( __FILE__ ).'php/lccc_announcementwidget.php' );
 
+require_once( plugin_dir_path( __FILE__ ).'php/lccc_announcement-subsite-widget.php' );
+
+require_once( plugin_dir_path( __FILE__ ).'php/lccc_stocker_eventwidget.php' );
+
+require_once( plugin_dir_path( __FILE__ ).'php/event-rest-api-fetch.php' );
+	
+require_once( plugin_dir_path( __FILE__ ).'php/lccc-event-rest-widget.php' );
 
 
-
-// CHANGE EXCERPT LENGTH FOR DIFFERENT POST TYPES
- 
-function custom_excerpt_length($length) {
-    global $post;
-    if ($post->post_type == 'lccc_event')
-    return 30;
-    else if ($post->post_type == 'lccc_announcement')
-    return 70;
+add_filter('pre_get_posts', 'query_post_type');
+function query_post_type($query) {
+  if( is_category() ) {
+    $post_type = get_query_var('post_type');
+    if($post_type)
+        $post_type = $post_type;
     else
-    return 20;
+        $post_type = array('nav_menu_item', 'post', 'lccc_events'); // don't forget nav_menu_item to allow menus to work!
+    $query->set('post_type',$post_type);
+    return $query;
+    }
 }
-add_filter('excerpt_length', 'custom_excerpt_length');
 
 ?>

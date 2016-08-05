@@ -25,7 +25,7 @@ function event_meta_box_add_meta_box() {
 		'event_meta_box-event-meta-box',
 		__( 'Event Meta Box', 'event_meta_box' ),
 		'event_meta_box_html',
-		array('lccc_event'),
+		array('lccc_events'),
 		'advanced',
 		'core'
 	);
@@ -39,30 +39,25 @@ function event_meta_box_html( $post) {
 <script>
 jQuery(document).ready(function(){
 jQuery('#event_start_date').datepicker({
-	dateFormat: "mm/dd/yy"
-<<<<<<< HEAD
+	dateFormat: "yy-mm-dd"
 });
 jQuery('#event_start_time').timepicker({
 	timeFormat: "hh:mm tt"
 });
 jQuery('#event_end_date').datepicker({
-	dateFormat: "mm/dd/yy"
+	dateFormat: "yy-mm-dd"
 });
-=======
-});
-jQuery('#event_start_time').timepicker({
-	timeFormat: "hh:mm tt"
-});
-jQuery('#event_end_date').datepicker({
-	dateFormat: "mm/dd/yy"
-});
->>>>>>> master
 jQuery('#event_end_time').timepicker({
 	timeFormat: "hh:mm tt"
 });	
 
 });
 </script>
+<h4>Sub Heading:</h4>
+<p>
+		<label for="event_meta_box_sub_heading"><?php _e( 'Stocker Event Sub Heading', 'event_meta_box' ); ?></label><br>
+		<input class="widefat" type="text" name="event_meta_box_sub_heading" id="event_meta_box_sub_heading" value="<?php echo event_meta_box_get_meta( 'event_meta_box_sub_heading' ); ?>">
+	</p>
 
 <h4>Submitted by:</h4>
 	<p>
@@ -101,17 +96,12 @@ jQuery('#event_end_time').timepicker({
 		<input type="checkbox" name="event_meta_box_students" id="event_meta_box_students" value="LCCC Students" <?php echo ( event_meta_box_get_meta( 'event_meta_box_students' ) === 'LCCC Students' ) ? 'checked' : ''; ?>>
 		<label for="event_meta_box_students"><?php _e( 'LCCC Students', 'lccc_event_metabox' ); ?></label>	
 </p>
+<p>
+		<label for="event_meta_box_event_location"><?php _e( 'Event Location', 'event_meta_box' ); ?></label><br>
+		<input class="widefat"  type="text" name="event_meta_box_event_location" id="event_meta_box_event_location" value="<?php echo event_meta_box_get_meta( 'event_meta_box_event_location' ); ?>">
+	
+	</p>
 
-<h4 class="metabox-field-title">Event Location</h4><br>
-<select name='event_meta_box_event_location' id='event_meta_box_event_location'>
- 		<?php 
-			$mypages = get_pages('post_type=lccc_location');
-			foreach($mypages as $page)
-			{
-				?><option><?php echo $page->post_title;?></option><?php
-			}
-			?>
-</select>
 <h4 class="metabox-field-title">Ticket Price(s):</h4>
 <p>
 		<input type="text" name="event_meta_box_ticket_price_s_" id="event_meta_box_ticket_price_s_" value="<?php echo event_meta_box_get_meta( 'event_meta_box_ticket_price_s_' ); ?>">
@@ -137,7 +127,14 @@ jQuery('#event_end_time').timepicker({
 		<label for="event_end_time"><?php _e( 'Event End time:', 'event_meta_box' ); ?></label><br>
 		<input type="text" name="event_end_time" id="event_end_time" value="<?php echo event_meta_box_get_meta( 'event_end_time' ); ?>">
 	</p>	
-
+	<p>
+		<label for="event_meta_box_stoccker_bg_color"><?php _e( 'Stocker Backgound Color', 'event_meta_box' ); ?></label><br>
+		<input class="widefat" type="text" name="event_meta_box_stoccker_bg_color" id="event_meta_box_stoccker_bg_color" value="<?php echo event_meta_box_get_meta( 'event_meta_box_stoccker_bg_color' ); ?>">
+	</p>
+<p>
+		<label for="event_meta_box_stocker_ticket_link"><?php _e( 'Stocker Buy Tickets Link', 'event_meta_box' ); ?></label><br>
+		<input class="widefat" type="text" name="event_meta_box_stocker_ticket_link" id="event_meta_box_stocker_ticket_link" value="<?php echo event_meta_box_get_meta( 'event_meta_box_stocker_ticket_link' ); ?>">
+	</p>
 <h4 class="metabox-field-title">Who should your audience contact for more information?</h4>
 <p>
 			<label for="lccc_event_contact_name"><?php _e( 'Name:', 'event_meta_box' ); ?></label><br>
@@ -161,6 +158,13 @@ function event_meta_box_save( $post_id ) {
 
 	if ( isset( $_POST['event_meta_box_name'] ) )
 		update_post_meta( $post_id, 'event_meta_box_name', esc_attr( $_POST['event_meta_box_name'] ) );
+	if ( isset( $_POST['event_meta_box_stoccker_bg_color'] ) )
+		update_post_meta( $post_id, 'event_meta_box_stoccker_bg_color', esc_attr( $_POST['event_meta_box_stoccker_bg_color'] ) );
+if ( isset( $_POST['event_meta_box_stocker_ticket_link'] ) )
+		update_post_meta( $post_id, 'event_meta_box_stocker_ticket_link', esc_attr( $_POST['event_meta_box_stocker_ticket_link'] ) );
+	if ( isset( $_POST['event_meta_box_sub_heading'] ) )
+		update_post_meta( $post_id, 'event_meta_box_sub_heading', esc_attr( $_POST['event_meta_box_sub_heading'] ) );
+	
 	if ( isset( $_POST['event_meta_box_phone'] ) )
 		update_post_meta( $post_id, 'event_meta_box_phone', esc_attr( $_POST['event_meta_box_phone'] ) );
 	if ( isset( $_POST['event_meta_box_e_mail'] ) )
@@ -187,6 +191,9 @@ function event_meta_box_save( $post_id ) {
 	if ( isset( $_POST['event_start_date'] ) )
    update_post_meta( $post_id, 'event_start_date', esc_attr( $_POST['event_start_date'] ) );
 	
+	if ( isset( $_POST['event_start_date'] ) )
+   update_post_meta( $post_id, 'start_date', esc_attr( $_POST['event_start_date'] ) ); 
+
 if ( isset( $_POST['event_start_time'] ) )
    update_post_meta( $post_id, 'event_start_time', esc_attr( $_POST['event_start_time'] ) ); 
 	
