@@ -1,61 +1,116 @@
+//This function creates the Angular module/App
+var lcccEventApp = new angular.module( 'wpAngularEventWidget', ['ui.router', 'ngResource'] );
+
+//This factory functions creates the Angular APP FEED
+lcccEventApp.factory( 'LCCCEvents', function( $resource ) {
+	return $resource( 'https://test.lorainccc.edu/wp-json/wp/v2/lccc_events?filter[order]=ASC&filter[orderby]=meta_value&filter[meta_key]=event_start_date&filter[posts_per_page]=5', {
+		ID: '@id'
+	})
+});
+
+lcccEventApp.controller( 'EventListCtrl', ['$scope', 'LCCCEvents', function( $scope, Posts ) {
+	console.log('EventListCtrl');
+	Posts.query(function( res ) {
+		$scope.posts = res;
+	});
+}]);
+                                
+
+//This is the config function for the app.It routes the templates loaded based on the URL you are on.
+lcccEventApp.config( function( $stateProvider, $urlRouterProvider){
+	$urlRouterProvider.otherwise('/');
+// The states below will load the controller based on what state the visitor is. The state is defined by the URl the visitor is on
+	$stateProvider
+		.state( 'lccc-event-list', {
+			url: '/',
+			controller: 'EventListCtrl',
+			templateUrl: appInfo.template_directory + 'templates/list.php'
+		})
+});
+
+lcccEventApp.filter( 'to_trusted', ['$sce', function( $sce ){
+	return function( text ) {
+		return $sce.trustAsHtml( text );
+	}
+}])
+//End of All LCCC App
+
+//Stocker App starts here
+
 //This function creates the Angular APP
-var wpApp = new angular.module( 'wpAngularEventWidget', ['ui.router', 'ngResource'] );
+var lcccStockerEventApp = new angular.module( 'wpAngularStockerEvtWidget', ['ui.router', 'ngResource'] );
 
-//This function creates the Angular APP FEED
-wpApp.factory( 'Posts', function( $resource ) {
-	return $resource( appInfo.api_url + 'lccc_events/:ID', {
+//This factory functions creates the Angular APP FEED
+lcccStockerEventApp.factory( 'LCCCStockerEvents', function( $resource ) {
+	return $resource( 'https://sites.lorainccc.edu/stocker/wp-json/wp/v2/lccc_events?filter[order]=ASC&filter[orderby]=meta_value&filter[meta_key]=event_start_date&filter[posts_per_page]=5', {
 		ID: '@id'
 	})
 });
 
-wpApp.factory( 'LCCC-Events', function( $resource ) {
-	return $resource( 'https://test.lorainccc.edu/wp-json/wp/v2/lccc_events', {
-		ID: '@id'
-	})
-});
-
-wpApp.factory( 'LCCC--Athletic-Events', function( $resource ) {
-	return $resource( 'https://test.lorainccc.edu/athletics/wp-json/wp/v2/lccc_events', {
-		ID: '@id'
-	})
-});
-
-wpApp.controller( 'ListCtrl', ['$scope', 'LCCC--Athletic-Events', function( $scope, Posts ) {
-	console.log('ListCtrl');
-	$scope.page_title = 'Blog Listing Page';
-
+lcccStockerEventApp.controller( 'StockerEventListCtrl', ['$scope', 'LCCCStockerEvents', function( $scope, Posts ) {
+	console.log('StockerEventListCtrl');
 	Posts.query(function( res ) {
 		$scope.posts = res;
 	});
 	
 }]);
 
-wpApp.controller( 'DetailCtrl', ['$scope', '$stateParams', 'Posts', function( $scope, $stateParams, Posts ) {
-	console.log( $stateParams );
-	Posts.get( { ID: $stateParams.id}, function(res){
-		$scope.post = res;
-	})
-}])
-
-//This routes the templates loaded based on the URL you are on
-wpApp.config( function( $stateProvider, $urlRouterProvider){
+//This is the config function for the app.It routes the templates loaded based on the URL you are on.
+lcccStockerEventApp.config( function( $stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/');
 // The states below will load the controller based on what state the visitor is. The state is defined by the URl the visitor is on
 	$stateProvider
-		.state( 'home-list', {
+		.state( 'stocker-event-list', {
 			url: '/',
-			controller: 'ListCtrl',
-			templateUrl: appInfo.template_directory + 'templates/list.html'
-		})
-		.state( 'detail', {
-			url: '/posts/:id',
-			controller: 'DetailCtrl',
-			templateUrl: appInfo.template_directory + 'templates/detail.html'
+			controller: 'StockerEventListCtrl',
+			templateUrl: appInfo.template_directory + 'templates/list.php'
 		})
 });
 
-wpApp.filter( 'to_trusted', ['$sce', function( $sce ){
+lcccStockerEventApp.filter( 'to_trusted', ['$sce', function( $sce ){
 	return function( text ) {
 		return $sce.trustAsHtml( text );
 	}
 }])
+
+//End of Stocker App
+
+//Athletic App starts here
+
+//This function creates the Angular APP
+var lcccAthleticEventApp = new angular.module( 'wpAngularAthEventWidget', ['ui.router', 'ngResource'] );
+
+//This factory functions creates the Angular APP FEED
+lcccAthleticEventApp.factory( 'LCCCAthleticEvents', function( $resource ) {
+	return $resource( 'https://test.lorainccc.edu/athletics/wp-json/wp/v2/lccc_events?filter[order]=ASC&filter[orderby]=meta_value&filter[meta_key]=event_start_date&filter[posts_per_page]=5', {
+		ID: '@id'
+	})
+});
+
+lcccAthleticEventApp.controller( 'AthEventListCtrl', ['$scope', 'LCCCAthleticEvents', function( $scope, Posts ) {
+	console.log('AthEventListCtrl');
+	Posts.query(function( res ) {
+		$scope.posts = res;
+	});
+	
+}]);
+
+//This is the config function for the app.It routes the templates loaded based on the URL you are on.
+lcccAthleticEventApp.config( function( $stateProvider, $urlRouterProvider){
+	$urlRouterProvider.otherwise('/');
+// The states below will load the controller based on what state the visitor is. The state is defined by the URl the visitor is on
+	$stateProvider
+		.state( 'athletic-event-list', {
+			url: '/',
+			controller: 'AthEventListCtrl',
+			templateUrl: appInfo.template_directory + 'templates/list.php'
+		})
+});
+
+lcccAthleticEventApp.filter( 'to_trusted', ['$sce', function( $sce ){
+	return function( text ) {
+		return $sce.trustAsHtml( text );
+	}
+}])
+
+//End of Athletic App

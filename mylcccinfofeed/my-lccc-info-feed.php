@@ -115,6 +115,119 @@ function enqueue_foundation() {
 	  }
 add_action( 'wp_enqueue_scripts', 'enqueue_foundation' );
 
+// Add various fields to the JSON output
+function eventapi_register_fields() {
+	// Add Start Date
+	register_api_field( 'lccc_events',
+		'event_start_date',
+		array(
+			'get_callback'		=> 'gofurther_get_event_start_date',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+    // Add Start Date Month
+	register_api_field( 'lccc_events',
+		'event_start_date_month',
+		array(
+			'get_callback'		=> 'gofurther_get_event_start_date_month',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+    // Add Start Date Day
+	register_api_field( 'lccc_events',
+		'event_start_date_day',
+		array(
+			'get_callback'		=> 'gofurther_get_event_start_date_day',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+    // Add Start time
+	register_api_field( 'lccc_events',
+		'event_start_time',
+		array(
+			'get_callback'		=> 'gofurther_get_event_start_time',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+    
+    // Add Event end_date
+	register_api_field( 'lccc_events',
+		'event_end_date',
+		array(
+			'get_callback'		=> 'gofurther_get_event_end_date',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);    
+    
+    // Add Event end_time
+	register_api_field( 'lccc_events',
+		'event_end_time',
+		array(
+			'get_callback'		=> 'gofurther_get_event_end_time',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);    
+    
+    
+    // Add Stocker bg_color
+	register_api_field( 'lccc_events',
+		'event_meta_box_stocker_bg_color',
+		array(
+			'get_callback'		=> 'gofurther_get_event_stocker_bg_color',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+
+    // Add Stocker link
+	register_api_field( 'lccc_events',
+		'event_meta_box_stocker_ticket_link',
+		array(
+			'get_callback'		=> 'gofurther_get_event_stocker_ticket_link',
+			'update_callback'	=> null,
+			'schema'			=> null
+		)
+	);
+}
+function gofurther_get_event_start_date( $object, $field_name, $request ) {
+	return event_meta_box_get_meta('event_start_date');
+}
+function gofurther_get_event_start_date_month( $object, $field_name, $request ) {
+    $starteventdate = event_meta_box_get_meta('event_start_date');
+    $startdate=strtotime($starteventdate);
+    $eventstartmonth=date("M",$startdate);
+	return $eventstartmonth;
+}
+function gofurther_get_event_start_date_day( $object, $field_name, $request ) {
+    $starteventdate = event_meta_box_get_meta('event_start_date');
+    $startdate=strtotime($starteventdate);
+    $eventstartday =date("j",$startdate);
+	return $eventstartday;
+}
+function gofurther_get_event_start_time( $object, $field_name, $request ) {
+	return event_meta_box_get_meta('event_start_time');
+}
+function gofurther_get_event_end_date( $object, $field_name, $request ) {
+	return event_meta_box_get_meta('event_end_date');   
+}
+function gofurther_get_event_end_time( $object, $field_name, $request ) {
+	return event_meta_box_get_meta('event_end_time');   
+}
+function gofurther_get_event_stocker_bg_color( $object, $field_name, $request ) {
+	return event_meta_box_get_meta('event_meta_box_stoccker_bg_color'); 
+}
+function gofurther_get_event_stocker_ticket_link( $object, $field_name, $request ) {
+	return event_meta_box_get_meta('event_meta_box_stocker_ticket_link');   
+}
+add_action( 'rest_api_init', 'eventapi_register_fields');
+
+
 function enqueue_angular(){
 		wp_enqueue_script( 'angular-core', 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js', array( 'jquery' ), '1.0', false );
 		wp_enqueue_script( 'angular-resource', '//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-resource.js', array('angular-core'), '1.0', false );

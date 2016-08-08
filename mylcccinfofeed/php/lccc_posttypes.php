@@ -71,7 +71,7 @@ function register_cpt_lccc_events() {
 		'labels' => $labels,
 		'hierarchical' => false,
 		'description' => 'This is the post type created for the displaying the events of the Lorain County Community College',
-		'supports' => array( 'title', 'editor', 'thumbnail', 'revisions', 'excerpt', 'author' ),
+		'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'revisions', 'excerpt', 'author' ),
 		'taxonomies' => array( 'where_to_display','event_categories' ),
 		'public' => true,
 		'show_ui' => true,

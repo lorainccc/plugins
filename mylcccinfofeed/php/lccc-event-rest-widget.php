@@ -35,10 +35,69 @@ class LCCC_Feed_Widget extends WP_Widget {
 			$widgetheader = $instance['eventheader'];
 			$whattodisplay = 'lccc_events';
 			echo $before_widget;
-			?>
-			<div class="small-12 medium-12 large-12 columns events-app" ng-app="wpAngularEventWidget">
-						<div ui-view></div>
-			</div>
+            ?>
+<div class="small-12 medium-12 large-12 columns lccc_events">
+<?php
+//displays the header block of the events
+	if( $widgetheader == 'stocker-header'){
+		echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
+			echo '<div class="small-12 medium-12 large-12 columns event-header-text-container">';
+				echo '<h2 class="headertext">'.' Stocker Events'.'</h2>';
+			echo '</div>';
+		echo '</div>';
+	}elseif( $widgetheader == 'athletics-header'){
+echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
+			echo '<div class="small-12 medium-12 large-12 columns event-header-text-container">';
+				echo '<h2 class="athletics-headertext">'.' Athletics Events'.'</h2>';
+			echo '</div>';
+		echo '</div>';
+}elseif (  $widgetheader =='lccc-header' ){
+		echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
+			echo '<div class="small-5 medium-5 large-5 columns '.$whattodisplay.' headerlogo">';
+				echo '<i class="lccc-font-lccc-reverse">'.'</i>';
+			echo '</div>';
+			echo '<div class="small-7 medium-7 large-7 columns event-header-text-container">';
+				echo '<h2 class="headertext">'.'Events'.'</h2>';
+			echo '</div>';
+		echo '</div>';
+	}else{ 	
+		echo '<div class="small-12 medium-12 large-12 columns '.$whattodisplay.'_header">';
+			echo '<div class="small-5 medium-5 large-5 columns '.$whattodisplay.' headerlogo">';
+				echo '<i class="lccc-font-lccc-reverse">'.'</i>';
+			echo '</div>';
+			echo '<div class="small-7 medium-7 large-7 columns event-header-text-container">';
+				echo '<h2 class="headertext">'.'Events'.'</h2>';
+			echo '</div>';
+		echo '</div>';
+	}
+            
+            
+switch ( $eventfeeds ){
+		case 'all-events':
+        ?>
+            <div class="small-12 medium-12 large-12 columns events-app" ng-app="wpAngularEventWidget">
+		          <div ui-view></div>
+            </div>
+        <?php
+		break;
+		case 'all-athletics':
+        ?>
+            <div class="small-12 medium-12 large-12 columns events-app" ng-app="wpAngularAthEventWidget">
+		          <div ui-view></div>
+            </div>
+        <?php
+		break;			
+		case 'all-stocker':
+        ?>
+            <div class="small-12 medium-12 large-12 columns events-app" ng-app="wpAngularStockerEvtWidget">
+		          <div ui-view></div>
+            </div>
+        <?php
+        break;
+	}			
+
+?>
+</div>
 		<?php
 			echo $after_widget;			
 	}	
